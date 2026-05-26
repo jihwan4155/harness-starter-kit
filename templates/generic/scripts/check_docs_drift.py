@@ -3,10 +3,11 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 import re
 import shlex
-import sys
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 
 DOC_FILES = (
@@ -15,19 +16,49 @@ DOC_FILES = (
     "README.md",
 )
 
-IGNORED_PREFIXES = (
-    "http://",
-    "https://",
-    "mailto:",
-)
+IGNORED_SCHEMES = {"http", "https", "mailto"}
 
 OPTIONAL_REFERENCES = {
     "CLAUDE.md",
-    "./harness-starter-kit",
-    "./harness-starter-kit/",
+    ".next",
+    ".next/",
+    ".venv",
+    ".venv/",
+    "coverage",
+    "coverage/",
+    "db.sqlite3",
+    "dist",
+    "dist/",
+    "build",
+    "build/",
+    "harness-starter-kit",
     "harness-starter-kit/",
+    "instance",
+    "instance/",
+    "node_modules",
+    "node_modules/",
     "target-repo/harness-starter-kit",
+    "tsconfig.tsbuildinfo",
+    "venv",
+    "venv/",
 }
+
+OPTIONAL_REFERENCE_PREFIXES = (
+    ".mypy_cache/",
+    ".pytest_cache/",
+    ".ruff_cache/",
+    "__pycache__/",
+    "node_modules/",
+)
+
+BACKTICK_RE = re.compile(r"`([^`\n]+)`")
+MARKDOWN_LINK_RE = re.compile(r"(?<!!)\[[^\]\n]+\]\(([^)\n]+)\)")
+
+
+@dataclass(frozen=True)
+class Reference:
+    value: str
+    source: str
 
 
 def iter_existing_docs(root: Path) -> list[Path]:
@@ -36,27 +67,87 @@ def iter_existing_docs(root: Path) -> list[Path]:
     return docs
 
 
-def extract_backtick_references(text: str) -> set[str]:
-    return set(re.findall(r"`([^`\n]+)`", text))
+def clean_markdown_link_target(target: str) -> str:
+    value = target.strip()
+    if value.startswith("<"):
+        closing = value.find(">")
+        if closing != -1:
+            return value[1:closing].strip()
+
+    try:
+        parts = shlex.split(value, posix=True)
+    except ValueError:
+        parts = value.split()
+    return parts[0] if parts else ""
 
 
-def looks_like_path(reference: str) -> bool:
-    if reference in OPTIONAL_REFERENCES:
-        return False
-    if reference.startswith(IGNORED_PREFIXES):
-        return False
+def extract_references(text: str) -> set[Reference]:
+    references = {
+        Reference(value=match, source="inline-code")
+        for match in BACKTICK_RE.findall(text)
+    }
+    references.update(
+        Reference(value=target, source="markdown-link")
+        for target in (
+            clean_markdown_link_target(match)
+            for match in MARKDOWN_LINK_RE.findall(text)
+        )
+        if target
+    )
+    return references
+
+
+def is_external_reference(reference: str) -> bool:
+    parts = urlsplit(reference.strip())
+    return bool(parts.scheme and (parts.scheme in IGNORED_SCHEMES or "://" in reference))
+
+
+def normalize_reference(reference: str) -> str:
+    value = reference.strip()
+    if value.startswith("<") and value.endswith(">"):
+        value = value[1:-1].strip()
+
+    parts = urlsplit(value)
+    path = unquote(parts.path).replace("\\", "/")
+    while path.startswith("./"):
+        path = path[2:]
+    return path
+
+
+def is_ignored_reference(reference: str) -> bool:
+    if is_external_reference(reference):
+        return True
+    if reference.strip().startswith("#"):
+        return True
     if any(token in reference for token in ("*", "<", ">", "{{", "}}")):
+        return True
+
+    normalized = normalize_reference(reference)
+    if not normalized:
+        return True
+    if normalized in OPTIONAL_REFERENCES:
+        return True
+    return any(normalized.startswith(prefix) for prefix in OPTIONAL_REFERENCE_PREFIXES)
+
+
+def looks_like_path(reference: Reference) -> bool:
+    if is_ignored_reference(reference.value):
         return False
-    if " " in reference:
+
+    normalized = normalize_reference(reference.value)
+    if " " in normalized:
         return False
-    return "/" in reference or "\\" in reference or reference in DOC_FILES
+    if reference.source == "markdown-link":
+        return True
+    return "/" in normalized or "\\" in reference.value or normalized in DOC_FILES
 
 
 def referenced_path_exists(root: Path, doc: Path, reference: str) -> bool:
-    normalized = reference.strip()
-    if normalized.startswith("./"):
-        normalized = normalized[2:]
-    return (root / normalized).exists() or (doc.parent / normalized).exists()
+    normalized = normalize_reference(reference)
+    path = Path(normalized)
+    if path.is_absolute():
+        return path.exists()
+    return (root / path).exists() or (doc.parent / path).exists()
 
 
 def looks_like_command(reference: str) -> bool:
@@ -84,13 +175,13 @@ def check_docs(root: Path) -> int:
 
     for doc in iter_existing_docs(root):
         text = doc.read_text(encoding="utf-8")
-        for reference in sorted(extract_backtick_references(text)):
-            if looks_like_command(reference):
+        for reference in sorted(extract_references(text), key=lambda item: item.value):
+            if reference.source == "inline-code" and looks_like_command(reference.value):
                 continue
             if looks_like_path(reference) and not referenced_path_exists(
-                root, doc, reference
+                root, doc, reference.value
             ):
-                missing_paths.append((doc, reference))
+                missing_paths.append((doc, reference.value))
 
     for doc, reference in missing_paths:
         print(f"Missing referenced path in {doc.relative_to(root)}: {reference}")
