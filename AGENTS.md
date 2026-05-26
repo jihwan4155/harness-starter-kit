@@ -29,6 +29,9 @@ When an agent is applying the kit from this nested layout:
   adoption.
 - Prefer adapting the target repository's existing docs, scripts, package
   manager, CI, and conventions over copying starter-kit defaults verbatim.
+- Before the target repository commits adoption changes, report whether the
+  nested `harness-starter-kit/` clone should be removed, ignored, or kept
+  intentionally as a submodule/reference.
 
 ## Commands
 

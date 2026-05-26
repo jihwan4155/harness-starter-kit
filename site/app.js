@@ -15,7 +15,7 @@
     "",
     "Preserve this repository's existing architecture, tools, package manager, commands, and conventions. Add only the minimum missing harness files. Prefer updating existing docs/configs over duplicating them. Do not overwrite or delete existing files without explaining why.",
     "",
-    "Finish with a short adoption report listing files changed, checks I can run, assumptions made, and remaining manual steps."
+    "Finish with a short adoption report listing files changed, checks I can run, assumptions made, remaining manual steps, and what to do with ./harness-starter-kit before committing."
   ].join("\n");
 
   var copy = {

@@ -65,6 +65,8 @@ appropriate directory.
   clear.
 - Do not add new package managers, frameworks, or services when existing tools
   can solve the problem.
+- Do not edit or commit a local `harness-starter-kit/` reference clone unless
+  the user explicitly asks.
 - Do not leave `temp_`, `_new`, `_old`, `_backup`, or `_fix` files behind.
 
 ## Completion Criteria
@@ -75,4 +77,3 @@ Before reporting completion:
 - Confirm no temporary files were left behind.
 - Update docs when behavior, architecture, commands, or known failures changed.
 - Summarize changed files, verification performed, and remaining risks.
-

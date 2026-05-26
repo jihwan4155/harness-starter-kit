@@ -27,6 +27,8 @@ Rules:
 - Do not delete existing files unless I explicitly ask.
 - Do not edit files under ./harness-starter-kit during adoption unless I
   explicitly ask.
+- Before finishing, tell me whether ./harness-starter-kit should be removed,
+  ignored, or kept intentionally as a submodule/reference before I commit.
 
 Expected work:
 - Add or update AGENTS.md with project-specific agent instructions.
@@ -43,4 +45,5 @@ Finish by reporting:
 - checks I can run locally
 - assumptions you made
 - remaining manual steps
+- what to do with ./harness-starter-kit before committing
 ```

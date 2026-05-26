@@ -82,6 +82,11 @@ assumptions made, and remaining manual steps.
 The prompt-first workflow is the main way to use this kit because the agent can
 inspect the target repository and adapt to its existing tools.
 
+Before committing the target repository, decide what to do with the local
+`harness-starter-kit/` clone: remove it, add it to the target `.gitignore`, or
+keep it intentionally as a submodule/reference. Do not accidentally commit the
+nested clone as ordinary project content.
+
 If you want a mechanical bootstrap instead, preview the generated files first:
 
 ```powershell
