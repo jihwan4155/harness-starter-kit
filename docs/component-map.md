@@ -12,7 +12,7 @@ This map connects harness engineering concepts to files in a target repository.
 | Document drift check | `scripts/check_docs_drift.py` | `templates/generic/scripts/check_docs_drift.py` |
 | Structure drift check | `scripts/check_structure.py` | `templates/generic/scripts/check_structure.py` |
 | Optional scheduled harness check | `.github/workflows/harness-check.yml` | `templates/generic/.github/workflows/harness-check.yml` |
-| Stack-specific rules | lint/type/pre-commit snippets | `templates/profiles/*` |
+| Stack-specific rules | lint/type/pre-commit/framework snippets | `templates/profiles/*` |
 | Adoption report example | final adoption summary | `docs/templates/adoption-report.md`, `examples/*-adoption-report.md` |
 
 ## Minimum Useful Install

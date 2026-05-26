@@ -1,0 +1,54 @@
+# Example Adoption Report: Django Target
+
+## Target
+
+`sample-django-site`, a tiny Django project with a `sample_site` project package
+and a `tasks` app.
+
+## Files Added Or Changed
+
+- Added `AGENTS.md` with Django project/app boundaries, virtual environment
+  rules, generated-file rules, and completion checks.
+- Added `.harness/structure-rules.json`.
+- Added `scripts/check_docs_drift.py` and `scripts/check_structure.py`.
+- Added `scripts/check_harness.py` as the single local verification entrypoint.
+- Added `docs/conventions/coding.md`, `docs/domain/glossary.md`, and
+  `docs/decisions/001-adopt-django-agent-harness.md`.
+- Added Django/Python profile snippets under `docs/harness/profiles/django/`.
+- Added `.gitignore` entries for `.venv/`, `db.sqlite3`, generated Python
+  caches, and `harness-starter-kit/`.
+
+## Checks Run
+
+```powershell
+.\.venv\Scripts\python.exe scripts\check_harness.py
+```
+
+The command ran:
+
+- `python manage.py check`
+- `python manage.py test`
+- `python scripts/check_docs_drift.py`
+- `python scripts/check_structure.py`
+
+All checks passed. The sample project had zero Django tests, so the next useful
+improvement would be adding behavior tests for real app logic.
+
+## Findings
+
+- A Python `scripts/check_harness.py` entrypoint fits Django projects well when
+  there is no existing package task runner.
+- Reuse Django's built-in `manage.py check` and `manage.py test` before adding
+  pytest, Ruff, mypy, or pre-commit.
+- `.venv/`, `db.sqlite3`, generated Python caches, and the local
+  `harness-starter-kit/` clone should not be committed.
+- Existing migrations should be treated as source and changed only when model
+  changes require it.
+
+## Remaining Manual Steps
+
+- Remove, ignore, or intentionally keep `harness-starter-kit/` before committing
+  adoption changes.
+- Add CI only after confirming the target repository's CI provider.
+- Add real Django tests once the app has behavior beyond the generated
+  scaffold.

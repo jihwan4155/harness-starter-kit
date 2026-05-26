@@ -64,6 +64,8 @@ record.
 Match constraints to the stack:
 
 - Python: Ruff, mypy, import-linter, vulture, pre-commit
+- Django: `manage.py check`, `manage.py test`, virtual environment and
+  development database ignores, and migration review rules
 - TypeScript: ESLint, TypeScript strictness, dependency boundary rules,
   unused-export checks
 - Next.js: `next build`, `tsc --noEmit --incremental false`, generated-file
@@ -100,5 +102,5 @@ installer only adds the GitHub Actions workflow when `--with-ci` is provided.
 
 Finish with a short adoption report. Use
 `docs/templates/adoption-report.md` as a shape and compare against
-`examples/node-adoption-report.md` or `examples/nextjs-adoption-report.md` when
-the target stack is similar.
+`examples/node-adoption-report.md`, `examples/nextjs-adoption-report.md`, or
+`examples/django-adoption-report.md` when the target stack is similar.

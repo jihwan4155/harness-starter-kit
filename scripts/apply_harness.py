@@ -52,7 +52,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--profile",
-        choices=("generic", "python", "typescript", "nextjs"),
+        choices=("generic", "python", "typescript", "nextjs", "django"),
         default="generic",
         help="Optional stack profile. Profiles add reference snippets only.",
     )
