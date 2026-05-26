@@ -1,9 +1,14 @@
 # Example Adoption Report: Node JavaScript Target
 
-## Target
+## Target Repository Observed
 
-`sample-task-tracker`, a tiny JavaScript ES module project using Node's built-in
-test runner.
+- Target: `sample-task-tracker`, a tiny JavaScript ES module project.
+- Package manager: npm.
+- Existing checks: Node's built-in test runner through `node --test`.
+- Existing docs: README only; no durable agent instruction file.
+- CI: none detected.
+- Layout: single-package repository with source under `src/` and tests under
+  `test/`.
 
 ## Files Added Or Changed
 
@@ -18,19 +23,34 @@ test runner.
 - Added `.gitignore` entries for generated files and the local
   `harness-starter-kit/` clone.
 
+## Existing Structures Reused
+
+- Reused the existing npm package scripts instead of introducing a new task
+  runner.
+- Reused Node's built-in test runner instead of adding a test framework.
+- Kept the single-package layout; no package-level `AGENTS.md` files were added.
+
 ## Checks Run
 
 ```powershell
 npm.cmd run check:harness
 ```
 
-The command ran syntax checks, `node --test`, document drift checks, and
-structure drift checks successfully.
+The command ran syntax checks, `node --test`, baseline document drift checks,
+and baseline structure drift checks successfully.
 
-## Advanced E2E Validation
+## Drift Checks Added
 
-An additional Node.js ES module target was used to test a more realistic
-multi-step adoption flow:
+- Baseline doc hygiene: broken local Markdown links and stale file references.
+- Baseline structure hygiene: temporary and backup filenames.
+- Target-specific architecture checks were not added because the sample project
+  had no real route/service, persistence, UI/server, or state-management
+  boundary to enforce.
+
+## Installer Smoke Validation
+
+The installer was also smoke-tested as a skeleton bootstrap helper, not as the
+main adoption path:
 
 ```powershell
 python harness-starter-kit\scripts\apply_harness.py --target . --profile typescript --dry-run
