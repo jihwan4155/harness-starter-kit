@@ -27,6 +27,29 @@ python scripts\check_harness.py
 Copy or adapt `check_harness.py` into the target repository's `scripts/`
 directory when the project has no existing task runner.
 
+## Profile Absorption Notes
+
+When Spring Boot is introduced after generic adoption:
+
+- Copy or adapt `check_harness.py` into `scripts/` only when the target has no
+  equivalent local verification command.
+- Prefer existing Maven or Gradle wrappers and merge guidance around those
+  commands instead of introducing a second build path.
+- Merge relevant ignores from `gitignore.harness.txt`, especially `target/`,
+  `build/`, `.gradle/`, `out/`, local config files, compiled artifacts, and the
+  local `harness-starter-kit/` clone.
+- Update `AGENTS.md` with Maven or Gradle commands, source tree rules,
+  generated paths, local config rules, migration rules, and completion checks.
+- Update `docs/conventions/coding.md` with package boundaries, controller,
+  service, repository, DTO, configuration, testing, and migration conventions.
+- Add a decision record when choosing Spring Boot, Maven versus Gradle, module
+  layout, persistence approach, or Flyway/Liquibase policy is an architectural
+  decision.
+- Treat Flyway or Liquibase migrations as source. Adopt profile guidance without
+  deleting or rewriting migrations unless the maintainer explicitly asks.
+- In the final report, list which snippets were adopted, adapted, skipped, or
+  deferred.
+
 ## Spring Notes
 
 - Keep application code and tests in the conventional Spring source tree for

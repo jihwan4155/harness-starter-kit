@@ -27,6 +27,26 @@ commands. On Windows PowerShell, that is often:
 Copy or adapt `check_harness.py` into the target repository's `scripts/`
 directory when the project has no existing task runner.
 
+## Profile Absorption Notes
+
+When Flask is introduced after generic adoption:
+
+- Copy or adapt `check_harness.py` into `scripts/` only when the target has no
+  equivalent local verification command.
+- Merge relevant ignores from `gitignore.harness.txt`, especially virtual
+  environments, generated Python caches, Flask instance data, coverage output,
+  local env files, and the local `harness-starter-kit/` clone.
+- Update `AGENTS.md` with Flask commands, app import path, route inspection
+  command, source directories, generated paths, and completion checks.
+- Update `docs/conventions/coding.md` with app factory, blueprint, config,
+  service, repository, testing, and error handling conventions.
+- Add a decision record when choosing Flask, app structure, config strategy,
+  persistence approach, or extension set is an architectural decision.
+- Keep optional local directories out of backtick path references unless they
+  actually exist, so document drift checks stay useful.
+- In the final report, list which snippets were adopted, adapted, skipped, or
+  deferred.
+
 ## Flask Notes
 
 - Prefer an app factory named `create_app`.

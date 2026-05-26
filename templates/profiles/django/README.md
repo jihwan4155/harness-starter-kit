@@ -26,6 +26,26 @@ commands. On Windows PowerShell, that is often:
 Copy or adapt `check_harness.py` into the target repository's `scripts/`
 directory when the project has no existing task runner.
 
+## Profile Absorption Notes
+
+When Django is introduced after generic adoption:
+
+- Copy or adapt `check_harness.py` into `scripts/` only when the target has no
+  equivalent local verification command.
+- Merge relevant ignores from `gitignore.harness.txt`, especially virtual
+  environments, generated Python caches, SQLite development databases, coverage
+  output, and the local `harness-starter-kit/` clone.
+- Update `AGENTS.md` with Django commands, app layout, settings modules,
+  generated paths, migration rules, and completion checks.
+- Update `docs/conventions/coding.md` with app boundaries, model/queryset,
+  view, serializer/form, service, testing, and migration conventions.
+- Add a decision record when choosing Django, app boundaries, settings layout,
+  persistence approach, or migration policy is an architectural decision.
+- Treat existing migrations as source. Adopt profile guidance without deleting
+  or rewriting migrations unless the maintainer explicitly asks.
+- In the final report, list which snippets were adopted, adapted, skipped, or
+  deferred.
+
 ## Django Notes
 
 - Keep project-level settings, ASGI/WSGI, and URL configuration in the Django
