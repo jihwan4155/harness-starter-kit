@@ -3,7 +3,7 @@
 Use this prompt from inside the target repository.
 
 ```text
-Read ../harness-starter-kit first. Apply the harness engineering starter kit to this
+Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
 repository.
 
 Goal:

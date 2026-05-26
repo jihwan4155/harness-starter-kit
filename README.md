@@ -22,8 +22,8 @@ software project.
 The intended workflow is simple:
 
 ```text
-Clone harness-starter-kit next to a target project.
-Ask an agent: "Read harness-starter-kit and apply its harness engineering guidelines
+Clone harness-starter-kit into a target project.
+Ask an agent: "Read ./harness-starter-kit and apply its harness engineering guidelines
 to this repo. Preserve the existing architecture and add only the minimum
 missing harness files."
 ```
@@ -50,18 +50,19 @@ less likely next time.
 
 ## Quick Start
 
-Clone or download this repository next to the target project:
+Clone or download this repository inside the target project:
 
 ```text
 workspace/
-|-- harness-starter-kit/
 `-- target-repo/
+    |-- harness-starter-kit/
+    `-- existing-project-files
 ```
 
 Then open the target repository with your coding agent and give it this prompt:
 
 ```text
-Read ../harness-starter-kit first. Apply the harness engineering starter kit to this
+Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
 repository.
 
 Preserve existing architecture, tools, and conventions. Add only the minimum
@@ -72,7 +73,7 @@ If you want to run the installer manually instead, preview the generated files
 first:
 
 ```powershell
-python scripts/apply_harness.py --target C:\path\to\target-repo --profile generic --dry-run
+python harness-starter-kit/scripts/apply_harness.py --target . --profile generic --dry-run
 ```
 
 The script never overwrites existing files unless `--force` is provided.
@@ -82,7 +83,7 @@ The script never overwrites existing files unless `--force` is provided.
 In a new or existing project, give your coding agent this prompt:
 
 ```text
-Read ../harness-starter-kit first. Apply the harness engineering starter kit to this
+Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
 repository.
 
 Requirements:

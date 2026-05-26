@@ -22,9 +22,9 @@
 预期工作流很简单：
 
 ```text
-把 harness-starter-kit 克隆到目标项目旁边。
+把 harness-starter-kit 克隆到目标项目内部。
 向代理发出请求：
-"先阅读 harness-starter-kit，然后把其中的 harness engineering 指南应用到
+"先阅读 ./harness-starter-kit，然后把其中的 harness engineering 指南应用到
 这个仓库。保留现有架构，只添加缺失的最小 harness 文件。"
 ```
 
@@ -46,18 +46,19 @@
 
 ## 快速开始
 
-把本仓库克隆或下载到目标项目旁边：
+把本仓库克隆或下载到目标项目内部：
 
 ```text
 workspace/
-|-- harness-starter-kit/
 `-- target-repo/
+    |-- harness-starter-kit/
+    `-- existing-project-files
 ```
 
 然后在目标仓库中打开你的代码代理，并给它这个提示词：
 
 ```text
-Read ../harness-starter-kit first. Apply the harness engineering starter kit to this
+Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
 repository.
 
 Preserve existing architecture, tools, and conventions. Add only the minimum
@@ -67,7 +68,7 @@ missing harness files. Finish with a short adoption report.
 如果你想手动运行安装脚本，请先预览将要生成的文件：
 
 ```powershell
-python scripts/apply_harness.py --target C:\path\to\target-repo --profile generic --dry-run
+python harness-starter-kit/scripts/apply_harness.py --target . --profile generic --dry-run
 ```
 
 除非提供 `--force`，否则脚本不会覆盖已有文件。
@@ -77,7 +78,7 @@ python scripts/apply_harness.py --target C:\path\to\target-repo --profile generi
 在新项目或已有项目中，把下面的提示交给你的代码代理：
 
 ```text
-Read ../harness-starter-kit first. Apply the harness engineering starter kit to this
+Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
 repository.
 
 Requirements:

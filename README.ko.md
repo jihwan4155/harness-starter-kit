@@ -22,9 +22,9 @@
 기본 사용 흐름은 단순합니다.
 
 ```text
-harness-starter-kit을 대상 프로젝트 옆에 클론합니다.
+harness-starter-kit을 대상 프로젝트 안에 클론합니다.
 에이전트에게 이렇게 요청합니다:
-"harness-starter-kit을 읽고 이 저장소에 harness engineering 가이드를 적용해줘.
+"./harness-starter-kit을 읽고 이 저장소에 harness engineering 가이드를 적용해줘.
 기존 아키텍처를 보존하고, 누락된 최소 harness 파일만 추가해줘."
 ```
 
@@ -49,18 +49,19 @@ harness-starter-kit을 대상 프로젝트 옆에 클론합니다.
 
 ## 빠른 시작
 
-이 저장소를 대상 프로젝트 옆에 클론하거나 다운로드합니다.
+이 저장소를 대상 프로젝트 안에 클론하거나 다운로드합니다.
 
 ```text
 workspace/
-|-- harness-starter-kit/
 `-- target-repo/
+    |-- harness-starter-kit/
+    `-- existing-project-files
 ```
 
 그 다음 대상 저장소를 코딩 에이전트로 열고 이 프롬프트를 주세요.
 
 ```text
-Read ../harness-starter-kit first. Apply the harness engineering starter kit to this
+Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
 repository.
 
 Preserve existing architecture, tools, and conventions. Add only the minimum
@@ -70,7 +71,7 @@ missing harness files. Finish with a short adoption report.
 설치 스크립트를 직접 실행하고 싶다면 먼저 생성될 파일을 확인하세요.
 
 ```powershell
-python scripts/apply_harness.py --target C:\path\to\target-repo --profile generic --dry-run
+python harness-starter-kit/scripts/apply_harness.py --target . --profile generic --dry-run
 ```
 
 이 스크립트는 `--force`를 제공하지 않는 한 기존 파일을 덮어쓰지 않습니다.
@@ -80,7 +81,7 @@ python scripts/apply_harness.py --target C:\path\to\target-repo --profile generi
 새 프로젝트나 기존 프로젝트에서 코딩 에이전트에게 다음 프롬프트를 주세요.
 
 ```text
-Read ../harness-starter-kit first. Apply the harness engineering starter kit to this
+Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
 repository.
 
 Requirements:

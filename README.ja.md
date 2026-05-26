@@ -22,9 +22,9 @@ engineering を適用するためのスターターキットです。
 想定しているワークフローはシンプルです。
 
 ```text
-harness-starter-kit を対象プロジェクトの隣にクローンします。
+harness-starter-kit を対象プロジェクトの中にクローンします。
 エージェントに次のように依頼します:
-"harness-starter-kit を読んで、このリポジトリに harness engineering の
+"./harness-starter-kit を読んで、このリポジトリに harness engineering の
 ガイドラインを適用してください。既存のアーキテクチャを保ち、不足している
 最小限の harness ファイルだけを追加してください。"
 ```
@@ -51,18 +51,19 @@ harness-starter-kit を対象プロジェクトの隣にクローンします。
 
 ## クイックスタート
 
-このリポジトリを対象プロジェクトの隣にクローンまたはダウンロードします。
+このリポジトリを対象プロジェクトの中にクローンまたはダウンロードします。
 
 ```text
 workspace/
-|-- harness-starter-kit/
 `-- target-repo/
+    |-- harness-starter-kit/
+    `-- existing-project-files
 ```
 
 次に、対象リポジトリをコーディングエージェントで開き、このプロンプトを渡します。
 
 ```text
-Read ../harness-starter-kit first. Apply the harness engineering starter kit to this
+Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
 repository.
 
 Preserve existing architecture, tools, and conventions. Add only the minimum
@@ -72,7 +73,7 @@ missing harness files. Finish with a short adoption report.
 インストーラーを手動で実行したい場合は、まず生成されるファイルを確認します。
 
 ```powershell
-python scripts/apply_harness.py --target C:\path\to\target-repo --profile generic --dry-run
+python harness-starter-kit/scripts/apply_harness.py --target . --profile generic --dry-run
 ```
 
 このスクリプトは、`--force` を指定しない限り既存ファイルを上書きしません。
@@ -83,7 +84,7 @@ python scripts/apply_harness.py --target C:\path\to\target-repo --profile generi
 渡してください。
 
 ```text
-Read ../harness-starter-kit first. Apply the harness engineering starter kit to this
+Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
 repository.
 
 Requirements:
