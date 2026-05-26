@@ -1,0 +1,11 @@
+target/
+build/
+out/
+.gradle/
+*.class
+*.log
+.env
+application-local.properties
+application-local.yml
+application-local.yaml
+harness-starter-kit/

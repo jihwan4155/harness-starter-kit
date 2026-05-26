@@ -26,8 +26,11 @@ DEFAULT_RULES = {
         "node_modules",
         "dist",
         "build",
+        "target",
+        "out",
         ".next",
         ".turbo",
+        ".gradle",
         "__pycache__",
     ],
 }

@@ -20,6 +20,8 @@ IGNORED_SCHEMES = {"http", "https", "mailto"}
 
 OPTIONAL_REFERENCES = {
     "CLAUDE.md",
+    ".gradle",
+    ".gradle/",
     ".next",
     ".next/",
     ".venv",
@@ -37,6 +39,10 @@ OPTIONAL_REFERENCES = {
     "instance/",
     "node_modules",
     "node_modules/",
+    "out",
+    "out/",
+    "target",
+    "target/",
     "target-repo/harness-starter-kit",
     "tsconfig.tsbuildinfo",
     "venv",
@@ -48,7 +54,9 @@ OPTIONAL_REFERENCE_PREFIXES = (
     ".pytest_cache/",
     ".ruff_cache/",
     "__pycache__/",
+    ".gradle/",
     "node_modules/",
+    "target/",
 )
 
 BACKTICK_RE = re.compile(r"`([^`\n]+)`")

@@ -26,8 +26,11 @@ DEFAULT_RULES = {
         "node_modules",
         "dist",
         "build",
+        "target",
+        "out",
         ".next",
         ".turbo",
+        ".gradle",
         "__pycache__",
     ],
 }
@@ -66,4 +69,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
