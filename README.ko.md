@@ -164,8 +164,70 @@ vulture, pre-commit을 위한 Python 중심 참고 스니펫을 추가합니다.
 선택합니다. ESLint, dependency boundary, unused export check, package script를
 위한 참고 스니펫을 추가합니다.
 
-프로필은 의도적으로 보수적입니다. 기존 빌드 시스템을 다시 쓰는 대신 스니펫과
-가이드를 제공합니다.
+`nextjs`는 대상 프로젝트가 Next.js 앱일 때 선택합니다. `next build`, emit 없는
+TypeScript check, generated file ignore, 최신 Next.js lint 주의사항을 위한 참고
+스니펫을 추가합니다.
+
+`django`는 대상 프로젝트가 Django 앱일 때 선택합니다. `manage.py check`,
+`manage.py test`, virtual environment ignore, SQLite 개발 DB ignore, Python
+`check_harness.py` entrypoint를 위한 참고 스니펫을 추가합니다.
+
+`flask`는 대상 프로젝트가 Flask 앱일 때 선택합니다. `unittest` discovery, Flask
+route check, instance-data ignore, Python `check_harness.py` entrypoint를 위한
+참고 스니펫을 추가합니다.
+
+`spring`은 대상 프로젝트가 Spring Boot 앱일 때 선택합니다. Maven 또는 Gradle
+wrapper check, Spring test command, generated build output ignore, local config
+ignore, Python `check_harness.py` entrypoint를 위한 참고 스니펫을 추가합니다.
+
+`fastapi`는 대상 프로젝트가 FastAPI 앱일 때 선택합니다. pytest, mypy,
+app import/startup check, generated file ignore, Python `check_harness.py`
+entrypoint를 위한 참고 스니펫을 추가합니다.
+
+`react`는 대상 프로젝트가 React 앱일 때 선택합니다. ESLint, TypeScript check,
+test/build script, React-specific lint rule을 위한 참고 스니펫을 추가합니다.
+
+`vue`는 대상 프로젝트가 Vue 앱일 때 선택합니다. ESLint, `vue-tsc`, test/build
+script, Vue-specific lint rule을 위한 참고 스니펫을 추가합니다.
+
+프로필은 의도적으로 보수적인 참고 자료입니다. 자동 프로젝트 변환이 아닙니다.
+installer는 profile 파일을 `docs/harness/profiles/<profile>/` 아래에 복사하므로,
+에이전트나 maintainer가 대상 프로젝트의 기존 빌드 시스템을 보존하면서 필요한
+스니펫만 merge, adapt, ignore할 수 있습니다.
+
+## 테스트된 시나리오
+
+자동 fixture smoke test는 다음 stack의 harness 설치를 확인합니다.
+
+- Node.js / TypeScript
+- Next.js
+- Django
+- FastAPI
+- Flask
+- React
+- Spring Boot
+- Vue
+
+이 fixture test는 installer가 기존 파일을 보존하고, 예상 profile snippet을 쓰며,
+generic drift check가 실행 가능한지 확인합니다.
+
+추가 end-to-end adoption check는 다음 대상으로 수동 실행되었습니다.
+
+- `node --test`, 반복 installer 실행, TypeScript profile `check_harness.py`,
+  의도적인 drift failure를 사용한 Node.js ES module 프로젝트
+- pytest, mypy, generated drift check, FastAPI profile `check_harness.py`를
+  사용한 FastAPI 프로젝트
+
+FastAPI E2E coverage는 virtual environment를 만들고 dependency를 설치하므로
+opt-in 자동 테스트로 제공합니다.
+
+```powershell
+$env:RUN_FASTAPI_E2E = "1"
+python -m unittest tests.test_fastapi_profile_e2e
+```
+
+GitHub Actions에서는 `Harness Check` workflow를 수동 실행하고
+`run_fastapi_e2e`를 켜면 같은 dependency-installing test가 실행됩니다.
 
 ## 로컬 검사
 

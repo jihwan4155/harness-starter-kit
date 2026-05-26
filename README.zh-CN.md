@@ -159,7 +159,69 @@ pre-commit 的 Python 参考片段。
 当目标项目使用 JavaScript 或 TypeScript 时，选择 `typescript`。它会添加面向
 ESLint、dependency boundary、unused export check 和 package script 的参考片段。
 
-这些 profile 有意保持保守。它们提供片段和指南，而不是重写现有构建系统。
+当目标项目是 Next.js 应用时，选择 `nextjs`。它会添加面向 `next build`、不产生
+输出的 TypeScript check、generated file ignore 和当前 Next.js lint 注意事项的
+参考片段。
+
+当目标项目是 Django 应用时，选择 `django`。它会添加面向 `manage.py check`、
+`manage.py test`、virtual environment ignore、SQLite 开发数据库 ignore 和
+Python `check_harness.py` entrypoint 的参考片段。
+
+当目标项目是 Flask 应用时，选择 `flask`。它会添加面向 `unittest` discovery、
+Flask route check、instance-data ignore 和 Python `check_harness.py`
+entrypoint 的参考片段。
+
+当目标项目是 Spring Boot 应用时，选择 `spring`。它会添加面向 Maven 或 Gradle
+wrapper check、Spring test command、generated build output ignore、local config
+ignore 和 Python `check_harness.py` entrypoint 的参考片段。
+
+当目标项目是 FastAPI 应用时，选择 `fastapi`。它会添加面向 pytest、mypy、
+app import/startup check、generated file ignore 和 Python `check_harness.py`
+entrypoint 的参考片段。
+
+当目标项目是 React 应用时，选择 `react`。它会添加面向 ESLint、TypeScript check、
+test/build script 和 React-specific lint rule 的参考片段。
+
+当目标项目是 Vue 应用时，选择 `vue`。它会添加面向 ESLint、`vue-tsc`、
+test/build script 和 Vue-specific lint rule 的参考片段。
+
+这些 profile 有意保持保守，是参考材料，而不是自动项目转换。installer 会把
+profile 文件复制到 `docs/harness/profiles/<profile>/` 下，方便代理或 maintainer
+在保留目标项目现有构建系统的同时，只 merge、adapt 或 ignore 合适的片段。
+
+## 已测试场景
+
+自动 fixture smoke test 覆盖以下 stack 的 harness installation：
+
+- Node.js / TypeScript
+- Next.js
+- Django
+- FastAPI
+- Flask
+- React
+- Spring Boot
+- Vue
+
+这些 fixture test 会验证 installer 能保留现有文件、写入预期的 profile snippet，
+并生成可运行的 generic drift check。
+
+额外的 end-to-end adoption check 已手动运行在：
+
+- 使用 `node --test`、重复 installer 运行、TypeScript profile `check_harness.py`
+  和故意制造的 drift failure 的 Node.js ES module 项目
+- 使用 pytest、mypy、generated drift check 和 FastAPI profile `check_harness.py`
+  的 FastAPI 项目
+
+FastAPI E2E coverage 会创建 virtual environment 并安装 dependency，因此作为
+opt-in 自动测试提供。
+
+```powershell
+$env:RUN_FASTAPI_E2E = "1"
+python -m unittest tests.test_fastapi_profile_e2e
+```
+
+在 GitHub Actions 中，手动运行 `Harness Check` workflow 并启用
+`run_fastapi_e2e`，即可执行同一个 dependency-installing test。
 
 ## 本地检查
 
