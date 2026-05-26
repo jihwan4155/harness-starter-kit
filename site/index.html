@@ -202,13 +202,28 @@ C:\HKS&gt; <span id="hero-command"></span><span class="cursor">_</span></code></
             <span>QUICKSTART.BAT</span>
             <span class="window-controls">COPY READY</span>
           </div>
-          <pre><code id="quick-command">Read ./harness-starter-kit first, then apply the harness engineering starter kit to this repository.
+          <pre><code id="quick-command">Use this kit to apply harness engineering to this repository:
 
-Treat the current working directory as the target repository. Treat ./harness-starter-kit as read-only reference material unless I explicitly ask you to edit the kit itself.
+https://github.com/baskduf/harness-starter-kit
 
-Preserve this repository's existing architecture, tools, package manager, commands, and conventions. Add only the minimum missing harness files. Prefer updating existing docs/configs over duplicating them. Do not overwrite or delete existing files without explaining why.
+Clone the kit into ./harness-starter-kit, read it, then apply its prompt-first harness engineering workflow to the current project.
 
-Finish with a short adoption report listing files changed, checks I can run, assumptions made, remaining manual steps, and what to do with ./harness-starter-kit before committing.</code></pre>
+Rules:
+- Treat the current working directory as the target repository.
+- Treat ./harness-starter-kit as read-only reference material after cloning.
+- Inspect this repository before editing.
+- Preserve existing architecture, tools, package manager, commands, docs, and conventions.
+- Do not blindly copy templates.
+- Add only the minimum useful harness pieces.
+- Prefer updating existing docs/configs over duplicating them.
+- Do not overwrite or delete existing files without explaining why.
+
+Expected result:
+- project-specific AGENTS.md or updated existing agent instructions
+- knowledge store if no equivalent exists
+- lightweight drift checks based on this repo's real rules
+- local verification commands using existing tools
+- adoption report with files changed, checks to run, assumptions, remaining manual steps, and whether ./harness-starter-kit should be removed, ignored, or kept before commit</code></pre>
           <button type="button" class="copy-button" data-i18n="quick.copy"></button>
           <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
         </div>

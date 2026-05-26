@@ -16,9 +16,9 @@ This map connects harness engineering concepts to files in a target repository.
 | Profile absorption | checklist for turning profile snippets into project rules | `docs/checklists/profile-absorption.md` |
 | Adoption report example | final adoption summary | `docs/templates/adoption-report.md`, `examples/*-adoption-report.md` |
 
-## Minimum Useful Install
+## Minimum Useful Adoption
 
-For a very small project, install only:
+For a very small project, the agent should add or adapt only:
 
 - `AGENTS.md`
 - `docs/decisions/000-template.md`
@@ -27,5 +27,5 @@ For a very small project, install only:
 - `scripts/check_structure.py`
 
 Then grow the harness as the project and agent usage mature.
-Install the optional GitHub Actions workflow with `--with-ci` only after
+Use the optional GitHub Actions workflow skeleton with `--with-ci` only after
 confirming the target repository uses GitHub Actions.

@@ -36,17 +36,41 @@
 [Adoption prompt](docs/prompts/apply-to-target-repo.md)
 
 `harness-starter-kit` is a prompt-first starter kit for applying harness
-engineering to any software project. It is meant to be cloned into a target
-repository, read by an agent, and adapted to that repository's actual tools and
-constraints.
+engineering to any software project. It is meant to be given to an agent as a
+Git URL, cloned by that agent into the target repository, read, and adapted to
+the target repository's actual tools and constraints.
 
-The intended workflow is simple:
+The intended workflow is simple: open the target repository with your coding
+agent, give it the kit URL and prompt, and let the agent clone, read, and adapt
+the kit.
 
 ```text
-Clone harness-starter-kit into a target project.
-Ask an agent: "Read ./harness-starter-kit and apply its harness engineering guidelines
-to this repo. Preserve the existing architecture and add only the minimum
-missing harness files."
+Use this kit to apply harness engineering to this repository:
+
+https://github.com/baskduf/harness-starter-kit
+
+Clone the kit into ./harness-starter-kit, read it, then apply its prompt-first
+harness engineering workflow to the current project.
+
+Rules:
+- Treat the current working directory as the target repository.
+- Treat ./harness-starter-kit as read-only reference material after cloning.
+- Inspect this repository before editing.
+- Preserve existing architecture, tools, package manager, commands, docs, and
+  conventions.
+- Do not blindly copy templates.
+- Add only the minimum useful harness pieces.
+- Prefer updating existing docs/configs over duplicating them.
+- Do not overwrite or delete existing files without explaining why.
+
+Expected result:
+- project-specific AGENTS.md or updated existing agent instructions
+- knowledge store if no equivalent exists
+- lightweight drift checks based on this repo's real rules
+- local verification commands using existing tools
+- adoption report with files changed, checks to run, assumptions, remaining
+  manual steps, and whether ./harness-starter-kit should be removed, ignored, or
+  kept before commit
 ```
 
 This is not primarily an automatic installer. The target project should end up
@@ -73,36 +97,17 @@ less likely next time.
 
 ## Quick Start
 
-Clone or download this repository inside the target project:
+Open the target repository with your coding agent. Give the agent the Git URL
+and ask it to clone the kit into `./harness-starter-kit`, read it, and apply the
+workflow:
 
 ```text
-workspace/
-`-- target-repo/
-    |-- harness-starter-kit/
-    `-- existing-project-files
-```
+Use this kit to apply harness engineering to this repository:
 
-Then open `target-repo`, not `target-repo/harness-starter-kit`, with your
-coding agent. The target repository is the working directory; the nested
-`harness-starter-kit/` directory is read-only reference material.
+https://github.com/baskduf/harness-starter-kit
 
-Give the agent this prompt:
-
-```text
-Read ./harness-starter-kit first, then apply the harness engineering starter kit
-to this repository.
-
-Treat the current working directory as the target repository. Treat
-./harness-starter-kit as read-only reference material unless I explicitly ask
-you to edit the kit itself.
-
-Preserve this repository's existing architecture, tools, package manager,
-commands, and conventions. Add only the minimum missing harness files. Prefer
-updating existing docs/configs over duplicating them. Do not overwrite or delete
-existing files without explaining why.
-
-Finish with a short adoption report listing files changed, checks I can run,
-assumptions made, and remaining manual steps.
+Clone the kit into ./harness-starter-kit, read it, then apply its prompt-first
+harness engineering workflow to the current project.
 ```
 
 The prompt-first workflow is the main way to use this kit because the agent can
@@ -115,6 +120,10 @@ Before committing the target repository, decide what to do with the local
 `harness-starter-kit/` clone: remove it, add it to the target `.gitignore`, or
 keep it intentionally as a submodule/reference. Do not accidentally commit the
 nested clone as ordinary project content.
+
+If your agent cannot access GitHub, clone the kit yourself inside the target
+repository, then ask the agent to read `./harness-starter-kit` and apply the
+same workflow.
 
 ### Optional Skeleton Bootstrap
 
@@ -145,8 +154,12 @@ The agent should inspect first, adapt second, and report the result. Give your
 coding agent this prompt:
 
 ```text
-Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
-repository.
+Use this kit to apply harness engineering to this repository:
+
+https://github.com/baskduf/harness-starter-kit
+
+Clone the kit into ./harness-starter-kit if it is not already present, read it,
+then apply its prompt-first harness engineering workflow to this repository.
 
 Requirements:
 - Inspect the target repository before editing.
@@ -193,7 +206,7 @@ harness-starter-kit/
 
 ## Adoption Modes
 
-Use `generic` for any project. It installs the durable harness skeleton without
+Use `generic` for any project. It provides the durable harness skeleton without
 assuming a language or framework.
 
 Use `python` when the target project uses Python. It adds Python-focused

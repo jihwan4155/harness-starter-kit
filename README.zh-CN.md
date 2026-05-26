@@ -32,16 +32,40 @@
 
 [English](README.md) | [한국어](README.ko.md) | [日本語](README.ja.md) | **简体中文**
 
-`harness-starter-kit` 是一个用于把 harness engineering 应用到任意软件项目的
-入门套件。
+`harness-starter-kit` 是一个 prompt-first 入门套件，用于把 harness
+engineering 应用到任意软件项目。它的预期用法是把 Git URL 交给代理，让代理在
+目标仓库中 clone、读取，并根据目标仓库真实的工具和约束进行适配。
 
-预期工作流很简单：
+预期工作流很简单：用代码代理打开目标仓库，把套件 URL 和提示词交给代理，让
+代理 clone、read、adapt。
 
 ```text
-Clone harness-starter-kit into a target project.
-Ask an agent: "Read ./harness-starter-kit and apply its harness engineering guidelines
-to this repo. Preserve the existing architecture and add only the minimum
-missing harness files."
+Use this kit to apply harness engineering to this repository:
+
+https://github.com/baskduf/harness-starter-kit
+
+Clone the kit into ./harness-starter-kit, read it, then apply its prompt-first
+harness engineering workflow to the current project.
+
+Rules:
+- Treat the current working directory as the target repository.
+- Treat ./harness-starter-kit as read-only reference material after cloning.
+- Inspect this repository before editing.
+- Preserve existing architecture, tools, package manager, commands, docs, and
+  conventions.
+- Do not blindly copy templates.
+- Add only the minimum useful harness pieces.
+- Prefer updating existing docs/configs over duplicating them.
+- Do not overwrite or delete existing files without explaining why.
+
+Expected result:
+- project-specific AGENTS.md or updated existing agent instructions
+- knowledge store if no equivalent exists
+- lightweight drift checks based on this repo's real rules
+- local verification commands using existing tools
+- adoption report with files changed, checks to run, assumptions, remaining
+  manual steps, and whether ./harness-starter-kit should be removed, ignored, or
+  kept before commit
 ```
 
 目标项目最终应该拥有一套实用的代理 harness：
@@ -62,35 +86,25 @@ missing harness files."
 
 ## 快速开始
 
-把本仓库克隆或下载到目标项目内部：
+在目标仓库中打开你的代码代理。把 Git URL 交给代理，并要求它 clone 到
+`./harness-starter-kit`、读取套件，然后应用 workflow：
 
 ```text
-workspace/
-`-- target-repo/
-    |-- harness-starter-kit/
-    `-- existing-project-files
+Use this kit to apply harness engineering to this repository:
+
+https://github.com/baskduf/harness-starter-kit
+
+Clone the kit into ./harness-starter-kit, read it, then apply its prompt-first
+harness engineering workflow to the current project.
 ```
 
-然后在目标仓库中打开你的代码代理，并给它这个提示词：
+如果代理无法访问 GitHub，请先在目标仓库中手动 clone 本套件，然后要求代理读取
+`./harness-starter-kit` 并应用同一个 workflow。
 
-```text
-Read ./harness-starter-kit first, then apply the harness engineering starter kit
-to this repository.
+### 可选: Skeleton Bootstrap
 
-Treat the current working directory as the target repository. Treat
-./harness-starter-kit as read-only reference material unless I explicitly ask
-you to edit the kit itself.
-
-Preserve this repository's existing architecture, tools, package manager,
-commands, and conventions. Add only the minimum missing harness files. Prefer
-updating existing docs/configs over duplicating them. Do not overwrite or delete
-existing files without explaining why.
-
-Finish with a short adoption report listing files changed, checks I can run,
-assumptions made, and remaining manual steps.
-```
-
-如果你想手动运行安装脚本，请先预览将要生成的文件：
+`apply_harness.py` 是 skeleton bootstrapper，不是 full harness adoption
+engine。如果你想手动运行它，请先预览将要生成的文件：
 
 ```powershell
 python harness-starter-kit/scripts/apply_harness.py --target . --profile generic --dry-run
@@ -109,21 +123,32 @@ python harness-starter-kit/scripts/apply_harness.py --target . --profile generic
 在新项目或已有项目中，把下面的提示交给你的代码代理：
 
 ```text
-Read ./harness-starter-kit first. Apply the harness engineering starter kit to this
-repository.
+Use this kit to apply harness engineering to this repository:
+
+https://github.com/baskduf/harness-starter-kit
+
+Clone the kit into ./harness-starter-kit if it is not already present, read it,
+then apply its prompt-first harness engineering workflow to this repository.
 
 Requirements:
+- Inspect the target repository before editing.
+- Identify the language, framework, package manager, test command, lint command,
+  build command, CI provider, docs structure, and monorepo layout if present.
+- Read existing AGENTS.md, CLAUDE.md, README, CONTRIBUTING, and CI configs if
+  they exist.
 - Preserve existing architecture, tools, and conventions.
 - Add or update AGENTS.md with project-specific rules.
 - Add docs/decisions, docs/failures, docs/conventions, and docs/domain if they
-  are missing.
-- Add drift checks under scripts/ and wire them into the closest existing
-  verification path.
+  are missing and no equivalent knowledge store exists.
+- Add lightweight drift checks under scripts/ only when they reflect real target
+  repo rules, then wire stable checks into the closest existing verification
+  path.
 - Prefer existing linters, tests, CI, and package managers over introducing new
   ones.
 - Do not overwrite existing files without explaining why.
-- Finish with a short report listing files changed, checks added, and remaining
-  manual integration steps.
+- Finish with a short report listing files changed, checks added, assumptions,
+  remaining manual integration steps, and what to do with ./harness-starter-kit
+  before committing.
 ```
 
 更长版本位于
@@ -150,7 +175,7 @@ harness-starter-kit/
 
 ## 采用模式
 
-`generic` 适用于任何项目。它会安装持久化 harness skeleton，不假设具体语言或
+`generic` 适用于任何项目。它会提供持久化 harness skeleton，不假设具体语言或
 框架。
 
 当目标项目使用 Python 时，选择 `python`。它会添加面向 Ruff、mypy、vulture 和

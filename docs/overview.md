@@ -6,11 +6,12 @@ coding agents can do reliable work inside durable rules.
 It is different from prompt engineering. Prompts improve one interaction.
 Harnesses improve the project environment.
 
-This starter kit is prompt-first reference material. Clone it into a target
-repository, ask an agent to read it, and have the agent adapt the pattern to the
-target repository's actual architecture, tools, and constraints. The optional
-installer only bootstraps skeleton files; it does not replace repository
-inspection or project-specific adoption.
+This starter kit is prompt-first reference material. Give an agent the Git URL
+from a target repository, have the agent clone the kit into
+`./harness-starter-kit`, read it, and adapt the pattern to the target
+repository's actual architecture, tools, and constraints. The optional installer
+only bootstraps skeleton files; it does not replace repository inspection or
+project-specific adoption.
 
 ## The Shift
 

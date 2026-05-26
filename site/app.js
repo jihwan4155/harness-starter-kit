@@ -9,13 +9,28 @@
   var terminalRunId = 0;
 
   var commandText = [
-    "Read ./harness-starter-kit first, then apply the harness engineering starter kit to this repository.",
+    "Use this kit to apply harness engineering to this repository:",
     "",
-    "Treat the current working directory as the target repository. Treat ./harness-starter-kit as read-only reference material unless I explicitly ask you to edit the kit itself.",
+    "https://github.com/baskduf/harness-starter-kit",
     "",
-    "Preserve this repository's existing architecture, tools, package manager, commands, and conventions. Add only the minimum missing harness files. Prefer updating existing docs/configs over duplicating them. Do not overwrite or delete existing files without explaining why.",
+    "Clone the kit into ./harness-starter-kit, read it, then apply its prompt-first harness engineering workflow to the current project.",
     "",
-    "Finish with a short adoption report listing files changed, checks I can run, assumptions made, remaining manual steps, and what to do with ./harness-starter-kit before committing."
+    "Rules:",
+    "- Treat the current working directory as the target repository.",
+    "- Treat ./harness-starter-kit as read-only reference material after cloning.",
+    "- Inspect this repository before editing.",
+    "- Preserve existing architecture, tools, package manager, commands, docs, and conventions.",
+    "- Do not blindly copy templates.",
+    "- Add only the minimum useful harness pieces.",
+    "- Prefer updating existing docs/configs over duplicating them.",
+    "- Do not overwrite or delete existing files without explaining why.",
+    "",
+    "Expected result:",
+    "- project-specific AGENTS.md or updated existing agent instructions",
+    "- knowledge store if no equivalent exists",
+    "- lightweight drift checks based on this repo's real rules",
+    "- local verification commands using existing tools",
+    "- adoption report with files changed, checks to run, assumptions, remaining manual steps, and whether ./harness-starter-kit should be removed, ignored, or kept before commit"
   ].join("\n");
 
   var copy = {
@@ -46,7 +61,7 @@
           eyebrow: "03 / The components",
           title: "Instructions, constraints, feedback, memory.",
           body:
-            "The kit installs the smallest useful set: AGENTS.md, knowledge folders, profile snippets, and drift checks."
+            "The agent applies the smallest useful set: AGENTS.md, knowledge folders, profile snippets, and drift checks."
         },
         adoption: {
           eyebrow: "04 / The workflow",
@@ -58,7 +73,7 @@
           eyebrow: "05 / The command",
           title: "The quickest path is an agent prompt.",
           body:
-            "Download this kit inside the target repository, then ask your coding agent to read it and apply only the missing harness pieces."
+            "Give your coding agent the Git URL and prompt. The agent clones the kit, reads it, and applies only the missing harness pieces."
         }
       },
       components: {
@@ -85,7 +100,7 @@
         eyebrow: "DIRECTORY TREE",
         title: "See the harness before it lands.",
         body:
-          "The starter kit sits inside the target repository while the agent reads it, then installs only the missing durable pieces into the target root.",
+          "The agent clones the starter kit into the target repository, reads it, then applies only the missing durable pieces into the target root.",
         kitLabel: "Starter kit",
         targetLabel: "Target repo after adoption"
       },
@@ -93,7 +108,7 @@
         eyebrow: "QUICK START",
         title: "Ask an agent to apply the kit.",
         body:
-          "Clone or download harness-starter-kit inside a target repository. From the target repo, give your coding agent this prompt.",
+          "From the target repo, give your coding agent the kit URL and this prompt. The agent handles cloning.",
         copy: "Copy agent prompt",
         copied: "Prompt copied.",
         selected: "Prompt selected. Press Ctrl+C to copy.",
@@ -120,8 +135,8 @@
         solution: {
           command: "explain harness",
           lines: [
-            "Put harness-starter-kit inside target-repo.",
-            "Ask the agent to read ./harness-starter-kit.",
+            "Give the agent the kit Git URL.",
+            "The agent clones it into ./harness-starter-kit.",
             "The agent inspects the project first.",
             "Then it adds only the missing harness pieces."
           ]
@@ -149,7 +164,7 @@
           lines: [
             "Copy the agent prompt below.",
             "Open target-repo with your coding agent.",
-            "Paste: Read ./harness-starter-kit first.",
+            "Paste: Use this Git URL to apply the kit.",
             "Review the report before merging changes."
           ]
         }
@@ -182,11 +197,11 @@
           eyebrow: "03 / 구성 요소",
           title: "지침, 제약, 피드백, 기억.",
           body:
-            "이 키트는 AGENTS.md, 지식 폴더, 프로필 스니펫, drift check로 가장 작은 실용 세트를 설치합니다."
+            "에이전트는 AGENTS.md, 지식 폴더, 프로필 스니펫, drift check로 가장 작은 실용 세트를 적용합니다."
         },
         adoption: {
           eyebrow: "04 / 적용 흐름",
-          title: "먼저 살피고, 없는 것만 설치합니다.",
+          title: "먼저 살피고, 없는 것만 적용합니다.",
           body:
             "대상 저장소가 항상 기준입니다. 기존 도구가 있다면 starter-kit 기본값보다 우선합니다."
         },
@@ -194,7 +209,7 @@
           eyebrow: "05 / 명령",
           title: "가장 빠른 시작은 에이전트 프롬프트입니다.",
           body:
-            "이 키트를 대상 저장소 안에 내려받고, 코딩 에이전트에게 읽은 뒤 누락된 harness 조각만 적용하라고 요청합니다."
+            "코딩 에이전트에게 Git URL과 프롬프트를 주세요. 에이전트가 키트를 clone하고 읽은 뒤 누락된 harness 조각만 적용합니다."
         }
       },
       components: {
@@ -221,7 +236,7 @@
         eyebrow: "DIRECTORY TREE",
         title: "적용 전에 폴더 구조를 확인하세요.",
         body:
-          "스타터 키트는 대상 저장소 안에 둡니다. 에이전트가 키트를 읽고, 대상 저장소 루트에는 누락된 durable 조각만 설치합니다.",
+          "에이전트가 스타터 키트를 대상 저장소 안에 clone합니다. 그런 다음 키트를 읽고, 대상 저장소 루트에는 누락된 durable 조각만 적용합니다.",
         kitLabel: "스타터 키트",
         targetLabel: "적용 후 대상 저장소"
       },
@@ -229,7 +244,7 @@
         eyebrow: "빠른 시작",
         title: "에이전트에게 키트 적용을 요청합니다.",
         body:
-          "harness-starter-kit을 대상 저장소 안에 클론하거나 다운로드하세요. 대상 저장소에서 코딩 에이전트에게 이 프롬프트를 주세요.",
+          "대상 저장소에서 코딩 에이전트에게 키트 URL과 이 프롬프트를 주세요. clone은 에이전트가 처리합니다.",
         copy: "에이전트 프롬프트 복사",
         copied: "프롬프트를 복사했습니다.",
         selected: "프롬프트를 선택했습니다. Ctrl+C로 복사하세요.",
@@ -256,8 +271,8 @@
         solution: {
           command: "explain harness",
           lines: [
-            "target-repo 안에 harness-starter-kit을 둡니다.",
-            "에이전트에게 ./harness-starter-kit을 읽게 합니다.",
+            "에이전트에게 키트 Git URL을 줍니다.",
+            "에이전트가 ./harness-starter-kit에 clone합니다.",
             "에이전트는 먼저 프로젝트를 살핍니다.",
             "그 다음 누락된 harness 조각만 추가합니다."
           ]
@@ -285,7 +300,7 @@
           lines: [
             "아래 에이전트 프롬프트를 복사합니다.",
             "target-repo를 코딩 에이전트로 엽니다.",
-            "붙여넣기: ./harness-starter-kit을 먼저 읽어줘.",
+            "붙여넣기: 이 Git URL의 키트를 적용해줘.",
             "merge 전 적용 보고서를 확인합니다."
           ]
         }
@@ -318,7 +333,7 @@
           eyebrow: "03 / 構成要素",
           title: "指示、制約、フィードバック、記憶。",
           body:
-            "このキットは AGENTS.md、知識フォルダ、プロファイル用スニペット、drift check という最小限で実用的なセットを導入します。"
+            "エージェントは AGENTS.md、知識フォルダ、プロファイル用スニペット、drift check という最小限で実用的なセットを適用します。"
         },
         adoption: {
           eyebrow: "04 / 導入フロー",
@@ -330,7 +345,7 @@
           eyebrow: "05 / コマンド",
           title: "最短の開始方法はエージェントプロンプトです。",
           body:
-            "このキットを対象リポジトリの中に置き、コーディングエージェントに読ませて不足している harness だけを適用させます。"
+            "コーディングエージェントに Git URL とプロンプトを渡します。エージェントがキットを clone し、読んで、不足している harness だけを適用します。"
         }
       },
       components: {
@@ -357,7 +372,7 @@
         eyebrow: "DIRECTORY TREE",
         title: "導入前にフォルダ構成を確認できます。",
         body:
-          "スターターキットは対象リポジトリの中に置きます。エージェントがそれを読み、対象リポジトリのルートには不足している durable な要素だけを導入します。",
+          "エージェントがスターターキットを対象リポジトリの中に clone します。その後キットを読み、対象リポジトリのルートには不足している durable な要素だけを適用します。",
         kitLabel: "スターターキット",
         targetLabel: "導入後の対象リポジトリ"
       },
@@ -365,7 +380,7 @@
         eyebrow: "クイックスタート",
         title: "エージェントにキットの適用を依頼します。",
         body:
-          "harness-starter-kit を対象リポジトリの中にクローンまたはダウンロードします。対象リポジトリで、このプロンプトをコーディングエージェントに渡してください。",
+          "対象リポジトリで、キット URL とこのプロンプトをコーディングエージェントに渡してください。clone はエージェントが行います。",
         copy: "エージェントプロンプトをコピー",
         copied: "プロンプトをコピーしました。",
         selected: "プロンプトを選択しました。Ctrl+C でコピーしてください。",
@@ -392,8 +407,8 @@
         solution: {
           command: "explain harness",
           lines: [
-            "target-repo の中に harness-starter-kit を置きます。",
-            "エージェントに ./harness-starter-kit を読ませます。",
+            "エージェントにキットの Git URL を渡します。",
+            "エージェントが ./harness-starter-kit に clone します。",
             "エージェントはまずプロジェクトを調べます。",
             "その後、不足している harness だけを追加します。"
           ]
@@ -421,7 +436,7 @@
           lines: [
             "下のエージェントプロンプトをコピーします。",
             "target-repo をコーディングエージェントで開きます。",
-            "貼り付け: まず ./harness-starter-kit を読んでください。",
+            "貼り付け: この Git URL のキットを適用してください。",
             "merge 前に導入レポートを確認します。"
           ]
         }
@@ -454,11 +469,11 @@
           eyebrow: "03 / 组成部分",
           title: "指令、约束、反馈、记忆。",
           body:
-            "这个套件安装最小但有用的一组内容：AGENTS.md、知识目录、profile 片段和 drift check。"
+            "代理会应用最小但有用的一组内容：AGENTS.md、知识目录、profile 片段和 drift check。"
         },
         adoption: {
           eyebrow: "04 / 采用流程",
-          title: "先检查，只安装缺失部分。",
+          title: "先检查，只应用缺失部分。",
           body:
             "目标仓库始终是事实来源。已有工具优先于 starter-kit 的默认设置。"
         },
@@ -466,7 +481,7 @@
           eyebrow: "05 / 命令",
           title: "最快的开始方式是代理提示词。",
           body:
-            "把这个套件放到目标仓库内部，然后让代码代理阅读它并只应用缺失的 harness 部分。"
+            "把 Git URL 和提示词交给代码代理。代理会 clone、读取套件，并只应用缺失的 harness 部分。"
         }
       },
       components: {
@@ -493,7 +508,7 @@
         eyebrow: "DIRECTORY TREE",
         title: "在采用之前先看清目录结构。",
         body:
-          "starter kit 放在目标仓库内部。代理先读取它，然后只把缺失的 durable 部分安装到目标仓库根目录中。",
+          "代理会把 starter kit clone 到目标仓库内部，然后读取它，并只把缺失的 durable 部分应用到目标仓库根目录中。",
         kitLabel: "starter kit",
         targetLabel: "采用后的目标仓库"
       },
@@ -501,7 +516,7 @@
         eyebrow: "快速开始",
         title: "让代理应用这个套件。",
         body:
-          "把 harness-starter-kit 克隆或下载到目标仓库内部。然后在目标仓库中，把这个提示词交给代码代理。",
+          "在目标仓库中，把套件 URL 和这个提示词交给代码代理。clone 由代理完成。",
         copy: "复制代理提示词",
         copied: "提示词已复制。",
         selected: "提示词已选中。请按 Ctrl+C 复制。",
@@ -528,8 +543,8 @@
         solution: {
           command: "explain harness",
           lines: [
-            "把 harness-starter-kit 放进 target-repo。",
-            "让代理先读取 ./harness-starter-kit。",
+            "把套件 Git URL 交给代理。",
+            "代理 clone 到 ./harness-starter-kit。",
             "代理会先检查现有项目。",
             "然后只添加缺失的 harness 部分。"
           ]
@@ -557,7 +572,7 @@
           lines: [
             "复制下面的代理提示词。",
             "用你的代码代理打开 target-repo。",
-            "粘贴: 先阅读 ./harness-starter-kit。",
+            "粘贴: 应用这个 Git URL 中的套件。",
             "合并前检查采用报告。"
           ]
         }

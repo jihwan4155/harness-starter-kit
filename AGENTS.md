@@ -13,6 +13,14 @@ the source of truth. Preserve its existing architecture and tools.
 
 The primary usage pattern is:
 
+1. The user opens the target repository with an agent.
+2. The user gives the agent the kit Git URL:
+   `https://github.com/baskduf/harness-starter-kit`.
+3. The agent clones the kit into `./harness-starter-kit`, reads it, and applies
+   the prompt-first harness workflow to the target repository.
+
+After cloning, the expected layout is:
+
 ```text
 target-repo/
 |-- harness-starter-kit/

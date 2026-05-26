@@ -1,16 +1,16 @@
 # Prompt: Apply harness-starter-kit To A Target Repository
 
-Use this prompt after cloning or downloading `harness-starter-kit` inside the
-target repository. Open the target repository root with your coding agent, not
-the `harness-starter-kit` subdirectory.
+Use this prompt from the target repository root. The agent should clone
+`harness-starter-kit` into `./harness-starter-kit`, read it, and then adapt the
+workflow to the target repository.
 
 ```text
-Read ./harness-starter-kit first, then apply the harness engineering starter kit
-to this repository.
+Use this kit to apply harness engineering to this repository:
 
-Treat the current working directory as the target repository. Treat
-./harness-starter-kit as read-only reference material unless I explicitly ask
-you to edit the kit itself.
+https://github.com/baskduf/harness-starter-kit
+
+Clone the kit into ./harness-starter-kit, read it, then apply its prompt-first
+harness engineering workflow to the current project.
 
 Goal:
 Make this repository easier and safer for coding agents to work in by adding
@@ -18,12 +18,14 @@ durable instructions, architecture constraints, feedback loops, knowledge
 storage, and drift checks.
 
 Adoption model:
-This is prompt-first adoption. Do not treat ./harness-starter-kit as an
-installer that knows this repository. Read it as reference material, inspect the
-target repository, and adapt the harness pattern to the target's existing
-architecture and tools.
+This is prompt-first adoption. Do not treat the kit as an installer that knows
+this repository. Clone it, read it as reference material, inspect the target
+repository, and adapt the harness pattern to the target's existing architecture
+and tools.
 
 Rules:
+- Treat the current working directory as the target repository.
+- Treat ./harness-starter-kit as read-only reference material after cloning.
 - Inspect this repository before editing.
 - Identify the language, framework, package manager, test command, lint command,
   build command, CI provider, docs structure, and monorepo layout if present.

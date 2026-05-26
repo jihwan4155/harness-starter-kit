@@ -1,7 +1,9 @@
 # Adoption Workflow
 
-Use this workflow when `harness-starter-kit` has been cloned or downloaded
-inside another repository and an agent is applying it from the target root.
+Use this workflow when an agent is applying `harness-starter-kit` from a target
+repository root. The primary flow is: the user gives the agent the Git URL, the
+agent clones the kit into `./harness-starter-kit`, reads it, and adapts the
+workflow to the target repository.
 
 The target repository is the current working directory. The
 `./harness-starter-kit` directory is reference material during adoption; do not
@@ -86,8 +88,8 @@ Match constraints to the stack:
 - Any stack: CI checks, formatting checks, forbidden-file scans
 
 Profile files are agent reference material, not automatic transformations.
-After installation, use snippets from `docs/harness/profiles/<profile>/` only
-when they fit the target repository's existing tools and conventions.
+Use snippets from `docs/harness/profiles/<profile>/` only when they fit the
+target repository's existing tools and conventions.
 
 Prefer existing tools when possible.
 
