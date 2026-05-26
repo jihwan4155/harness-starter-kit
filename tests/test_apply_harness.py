@@ -124,19 +124,56 @@ class ApplyHarnessTests(unittest.TestCase):
     def test_generated_harness_checks_pass(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             target = Path(tmp)
+
             self.run_installer(target)
 
-            for script in (
-                target / "scripts" / "check_docs_drift.py",
-                target / "scripts" / "check_structure.py",
-            ):
-                subprocess.run(
-                    [sys.executable, str(script)],
-                    cwd=target,
-                    check=True,
-                    capture_output=True,
-                    text=True,
-                )
+            result = subprocess.run(
+                [sys.executable, str(target / "scripts" / "check_structure.py")],
+                cwd=target,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(0, result.returncode)
+            result2 = subprocess.run(
+                [sys.executable, str(target / "scripts" / "check_docs_drift.py")],
+                cwd=target,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(0, result2.returncode)
+
+    def test_fastapi_profile_snippets_are_written_under_docs_harness(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp)
+
+            self.run_installer(target, "--profile", "fastapi")
+
+            profile_root = target / "docs" / "harness" / "profiles" / "fastapi"
+            self.assertTrue((profile_root / "README.md").exists())
+            self.assertTrue((profile_root / "check_harness.py").exists())
+            self.assertTrue((profile_root / "gitignore.harness.txt").exists())
+
+    def test_react_profile_snippets_are_written_under_docs_harness(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp)
+
+            self.run_installer(target, "--profile", "react")
+
+            profile_root = target / "docs" / "harness" / "profiles" / "react"
+            self.assertTrue((profile_root / "README.md").exists())
+            self.assertTrue((profile_root / "eslint.config.harness.mjs").exists())
+            self.assertTrue((profile_root / "package-scripts.harness.json").exists())
+
+    def test_vue_profile_snippets_are_written_under_docs_harness(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp)
+
+            self.run_installer(target, "--profile", "vue")
+
+            profile_root = target / "docs" / "harness" / "profiles" / "vue"
+            self.assertTrue((profile_root / "README.md").exists())
+            self.assertTrue((profile_root / "eslint.config.harness.mjs").exists())
+            self.assertTrue((profile_root / "package-scripts.harness.json").exists())
 
 
 if __name__ == "__main__":
