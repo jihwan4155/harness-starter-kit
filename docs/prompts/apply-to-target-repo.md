@@ -16,6 +16,11 @@ If I ask for /harness doctor instead of adoption, use
 ./harness-starter-kit/commands/harness-doctor.md to inspect and score the
 repository without modifying files.
 
+If I ask for /harness update after adoption, use
+./harness-starter-kit/commands/harness-update.md to refresh the kit reference,
+selectively update target harness files, record .harness/source.json, and report
+what changed without blindly overwriting target files.
+
 Goal:
 Make this repository easier and safer for coding agents to work in by adding
 durable instructions, architecture constraints, feedback loops, knowledge

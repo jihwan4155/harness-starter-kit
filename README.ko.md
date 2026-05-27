@@ -196,6 +196,19 @@ Breakdown:
 - Adoption Clarity: 14/20
 ```
 
+## Harness Update
+
+저장소가 harness를 채택한 뒤에는 `/harness update`를 사용해 로컬
+`./harness-starter-kit` 참조 클론을 최신화하고, 새 harness 지침 중 맞는 것만
+선택적으로 적용할 수 있습니다.
+
+Harness Update는 확인된 kit source를 `.harness/source.json`에 기록하고,
+업데이트 후보를 분류한 뒤 Harness Update Report로 마무리합니다. target 저장소
+파일을 무조건 덮어쓰면 안 됩니다.
+
+에이전트 명령은 [`commands/harness-update.md`](commands/harness-update.md)에
+있습니다.
+
 ## 에이전트 주도 적용
 
 새 프로젝트나 기존 프로젝트에서 실제 적용 경로는 에이전트 주도 방식입니다.

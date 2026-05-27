@@ -166,3 +166,19 @@ Actual results should be recorded later with
 When the adoption report is saved as a file, run
 `scripts/check_effectiveness_plan.py --require-report` to catch missing sections
 or placeholder measurement fields before finishing.
+
+## 9. Update An Existing Harness
+
+After adoption, use `/harness update` when the maintainer wants to refresh the
+local kit reference and consider newly added harness guidance.
+
+Follow `commands/harness-update.md`. Refresh or clone `./harness-starter-kit`,
+compare the current kit source with `.harness/source.json`, and classify update
+opportunities as safe candidates, careful patches, reference-only guidance, or
+manual-review items.
+
+The target repository remains the source of truth. Do not overwrite existing
+target files with starter-kit templates. Patch only the pieces that fit the
+target repository's current architecture, tools, docs, and verification path.
+Finish with a Harness Update Report and update `.harness/source.json` when the
+kit source was successfully confirmed.

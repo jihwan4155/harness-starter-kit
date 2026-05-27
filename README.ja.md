@@ -185,6 +185,19 @@ Breakdown:
 - Adoption Clarity: 14/20
 ```
 
+## Harness Update
+
+リポジトリが harness を採用した後は、`/harness update` を使ってローカルの
+`./harness-starter-kit` 参照 clone を更新し、新しい harness guidance のうち
+合うものだけを選択的に適用できます。
+
+Harness Update は確認済みの kit source を `.harness/source.json` に記録し、
+update 候補を分類して Harness Update Report で完了します。target repository
+のファイルを無条件に上書きしてはいけません。
+
+Agent command は [`commands/harness-update.md`](commands/harness-update.md) に
+あります。
+
 ## エージェント主導の導入
 
 新規または既存のプロジェクトで、コーディングエージェントに次のプロンプトを

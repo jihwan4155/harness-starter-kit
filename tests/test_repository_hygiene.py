@@ -74,6 +74,26 @@ class RepositoryHygieneTests(unittest.TestCase):
             self.assertIn("changed files", text)
             self.assertIn("remaining risks", text)
 
+    def test_harness_update_command_is_documented_and_linked(self) -> None:
+        update_command = (REPO_ROOT / "commands" / "harness-update.md").read_text(
+            encoding="utf-8"
+        )
+        root_agents = (REPO_ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+        component_map = (REPO_ROOT / "docs" / "component-map.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(".harness/source.json", update_command)
+        self.assertIn("git -C harness-starter-kit pull --ff-only origin main", update_command)
+        self.assertIn("dirty", update_command)
+        self.assertIn("blindly overwrite", update_command)
+        self.assertIn("Harness Update Report", update_command)
+
+        for text in (root_agents, readme, component_map):
+            self.assertIn("/harness update", text)
+            self.assertIn("commands/harness-update.md", text)
+
     def test_profile_reference_paths_distinguish_clone_from_installer_output(
         self,
     ) -> None:

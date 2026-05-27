@@ -204,6 +204,19 @@ Breakdown:
 - Adoption Clarity: 14/20
 ```
 
+## Harness Update
+
+After a repository has adopted the harness, use `/harness update` to refresh the
+local `./harness-starter-kit` reference clone and selectively apply new harness
+guidance.
+
+Harness Update records the confirmed kit source in `.harness/source.json`,
+classifies update opportunities, and finishes with a Harness Update Report. It
+must not blindly overwrite target repository files.
+
+The agent command lives in
+[`commands/harness-update.md`](commands/harness-update.md).
+
 ## Agent-Driven Adoption
 
 In a new or existing project, the agent-driven path is the real adoption path.

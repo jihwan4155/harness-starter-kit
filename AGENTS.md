@@ -47,6 +47,11 @@ When the user asks for `/harness doctor`, run the diagnostic workflow in
 `commands/harness-doctor.md`. It must inspect and report only; it must not
 modify files or remove a target-local `./harness-starter-kit` directory.
 
+When the user asks for `/harness update`, run the update workflow in
+`commands/harness-update.md`. It may update target repository harness files, but
+it must refresh the kit reference first, avoid blind overwrites, and finish with
+a Harness Update Report.
+
 Run these checks after changing installer behavior, templates, or drift scripts:
 
 ```powershell

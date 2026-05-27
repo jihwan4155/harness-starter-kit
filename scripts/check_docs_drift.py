@@ -24,6 +24,7 @@ OPTIONAL_REFERENCES = {
     ".gradle/",
     ".next",
     ".next/",
+    ".harness/source.json",
     ".venv",
     ".venv/",
     ".vite",

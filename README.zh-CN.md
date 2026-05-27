@@ -171,6 +171,18 @@ Breakdown:
 - Adoption Clarity: 14/20
 ```
 
+## Harness Update
+
+仓库完成 harness adoption 之后，可以使用 `/harness update` 更新本地
+`./harness-starter-kit` reference clone，并只选择性应用适合当前仓库的新
+harness guidance。
+
+Harness Update 会把确认过的 kit source 记录到 `.harness/source.json`，分类更新
+候选项，并以 Harness Update Report 结束。它不能无条件覆盖 target repository
+文件。
+
+Agent command 位于 [`commands/harness-update.md`](commands/harness-update.md)。
+
 ## 由代理驱动的采用流程
 
 在新项目或已有项目中，把下面的提示交给你的代码代理：

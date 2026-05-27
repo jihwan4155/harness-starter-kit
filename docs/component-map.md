@@ -13,6 +13,8 @@ This map connects harness engineering concepts to files in a target repository.
 | Structure drift check | `scripts/check_structure.py` | `templates/generic/scripts/check_structure.py` |
 | Effectiveness plan check | `scripts/check_effectiveness_plan.py` | `templates/generic/scripts/check_effectiveness_plan.py` |
 | Harness readiness diagnostic | `/harness doctor` report | `commands/harness-doctor.md`, `docs/scoring/harness-score-rubric.md` |
+| Harness source tracking | `.harness/source.json` | documented in `commands/harness-update.md` |
+| Harness update workflow | `/harness update` report | `commands/harness-update.md` |
 | Baseline harness score scan | preliminary file and directory scan | `scripts/harness_doctor.py` |
 | Optional scheduled harness check | `.github/workflows/harness-check.yml` | `templates/generic/.github/workflows/harness-check.yml` |
 | Stack-specific rules | lint/type/pre-commit/framework snippets | `templates/profiles/*` |
@@ -39,3 +41,8 @@ confirming the target repository uses GitHub Actions.
 Use `/harness doctor` when the maintainer wants a diagnostic score before or
 after adoption. The command reports readiness; it does not install harness
 files.
+
+Use `/harness update` after adoption when the maintainer wants to refresh the
+local kit reference and selectively apply new harness guidance. The command
+records the current kit source in `.harness/source.json` and reports applied,
+skipped, and manual-review items.
