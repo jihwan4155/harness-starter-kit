@@ -8,7 +8,7 @@ Use this checklist after copying the starter kit into a target repository.
 - [ ] If the repo includes a local server, database seed, docker-compose, JAR,
       mock API, or backend fixture, document how to run and verify it or explain
       why it was not run.
-- [ ] Before feature implementation, write a small scenario test plan or
+- [ ] Before broad feature implementation, write a small scenario test note or
       explicitly say why build-only validation is enough.
 - [ ] If localized source, XML resources, PDF-derived text, or prior mojibake is
       present, run or document an encoding audit before broad edits.
@@ -26,6 +26,7 @@ Use this checklist after copying the starter kit into a target repository.
       baseline status, comparable tasks, primary metric, review window, and
       results location.
 - [ ] If implementation changed behavior or integration policy, decide whether
-      `docs/decisions/` needs an ADR instead of only domain notes.
+      `docs/decisions/` needs an ADR; for narrow changes, a report or check note
+      is enough.
 - [ ] If the adoption report is saved as a file,
       `scripts/check_effectiveness_plan.py --require-report` passes.

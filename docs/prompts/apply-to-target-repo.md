@@ -53,6 +53,12 @@ Rules:
   explicitly ask.
 - Treat any stack profile files as reference snippets for you to adapt, not as
   automatic changes that must be copied into the project.
+- Prioritize rules as follows: always preserve existing architecture and tools,
+  document exact local checks, and protect generated/local files; when present,
+  document servers, seeds, Docker, JARs, emulators, devices, or fixtures; when
+  touching auth, external APIs, permissions, hardware, persistence, state, or
+  network boundaries, consider whether a decision record is needed; for broad
+  feature work, write a small scenario test note.
 - During prompt-first adoption, read profile templates from
   ./harness-starter-kit/templates/profiles/<profile>/. If installer-generated
   snippets already exist in this target repository, review them under
@@ -74,7 +80,7 @@ Expected work:
 - If the repo includes a local server, database seed, docker-compose, JAR, mock
   API, or backend fixture, document how to run and verify it or explain why it
   was not run.
-- Before feature implementation, write a small scenario test plan or explicitly
+- Before broad feature implementation, write a small scenario test note or explicitly
   say why build-only validation is enough.
 - If localized source, XML resources, PDF-derived instructions, or mojibake risk
   exists, run or document an encoding audit before broad edits.
@@ -104,7 +110,8 @@ Finish by reporting:
 - checks I can run locally
 - effectiveness measurement plan
 - server or fixture verification plan
-- scenario test plan, or the reason build-only validation is enough
+- scenario test note for broad feature work, or the reason build-only validation
+  is enough
 - failure memory recorded or skipped with reason
 - assumptions you made
 - remaining manual steps

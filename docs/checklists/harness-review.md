@@ -13,8 +13,8 @@ Run this monthly or after repeated agent mistakes.
       dependency, or server fixture policy change without a decision record?
 - [ ] Do local servers, database seeds, JARs, docker-compose services, mock APIs,
       emulators, or device prerequisites have a documented verification plan?
-- [ ] Is there a feature scenario test plan, or a written reason build-only
-      validation is enough?
+- [ ] For broad feature work, is there a scenario test note, or a written reason
+      build-only validation is enough?
 - [ ] If localized text is present, are UTF-8 and mojibake risks covered by a
       check or manual audit note?
 - [ ] Are test failures and error messages specific enough for an agent to fix?

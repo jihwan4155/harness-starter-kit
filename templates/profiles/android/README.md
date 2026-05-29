@@ -7,6 +7,18 @@ These files are agent reference material, not automatic transformations. Merge
 only the pieces that fit the target project's existing Gradle setup and local
 development workflow.
 
+Apply this profile by priority:
+
+- Always protect generated Android outputs, local SDK config, and the target's
+  existing Gradle wrapper workflow.
+- When present, document local server, SQL seed, JAR, emulator, or device
+  prerequisites.
+- When touching networking, permissions, NFC, Bluetooth, or other
+  hardware-dependent behavior, document the relevant caveats and consider
+  whether a decision record is needed.
+- For broad feature work, write a small scenario test note. For narrow fixes,
+  name the relevant Gradle or harness check.
+
 ## Recommended Checks
 
 - `./gradlew test` or `.\gradlew.bat test` for JVM unit tests.
@@ -14,8 +26,8 @@ development workflow.
   debug APK builds.
 - `python scripts/check_docs_drift.py` for stale documentation references.
 - `python scripts/check_structure.py` for temporary or drift-prone files.
-- `python scripts/check_encoding_hygiene.py` when Korean, Japanese, Chinese, or
-  other localized source/XML text has shown mojibake or non-UTF-8 risk.
+- `python scripts/check_encoding_hygiene.py` only when localized source/XML
+  text is present or mojibake/non-UTF-8 risk has been found.
 
 Prefer the project Gradle wrapper over global `gradle`. On Windows PowerShell,
 that is often:
@@ -35,13 +47,13 @@ generic drift checks when they are present.
 
 ## Local Server And Data Fixtures
 
-If the repository includes a local server JAR, SQL seed files, docker-compose
-file, or backend fixture used by the app:
+If the app behavior depends on a local server JAR, SQL seed files,
+docker-compose file, or backend fixture:
 
 - Document the server start command, working directory, Java version, ports,
   seed data, and shutdown steps in `README.md`, `AGENTS.md`, or
   `docs/domain/`.
-- Add a small server verification plan before implementing app behavior. At
+- Add a small server verification note before broad app behavior work. At
   minimum, record how to prove the server started and which endpoint or log
   line confirms readiness.
 - If the server cannot be run locally, explain why and list the manual or
@@ -52,9 +64,9 @@ file, or backend fixture used by the app:
 
 ## Scenario Test Plan
 
-Before feature implementation, write a small scenario matrix or explicitly say
-why build-only validation is enough. For mobile training apps, common scenarios
-include:
+Before broad feature implementation, write a small scenario test note or
+explicitly say why build-only validation is enough. For mobile training apps,
+common scenarios include:
 
 - login and session handling
 - product list and product detail loading
@@ -78,9 +90,11 @@ When Android or Kotlin is introduced after generic adoption:
 - Update `docs/conventions/coding.md` with package boundaries, ViewModel or
   UI-layer rules, Retrofit/API boundaries, coroutine/threading expectations,
   resource naming, and testing conventions.
-- Add a decision record when choosing Android/Kotlin app structure, networking
-  boundaries, persistence strategy, NFC/Bluetooth behavior, permission
-  fallbacks, or local-server integration policy is an architectural decision.
+- Consider a decision record when changing or selecting Android/Kotlin app
+  structure, networking boundaries, persistence strategy, NFC/Bluetooth
+  behavior, permission fallbacks, or local-server integration policy. When the
+  task only follows the existing architecture or makes a narrow fix, a final
+  report or check note is enough.
 - In the final report, list which snippets were adopted, adapted, skipped, or
   deferred.
 
@@ -93,6 +107,7 @@ When Android or Kotlin is introduced after generic adoption:
 - Treat emulator/device checks as manual verification unless the target already
   has instrumentation tests wired into CI.
 - Document runtime permission checks for camera, location, Bluetooth, NFC, and
-  notifications when behavior depends on them.
-- Document NFC and Bluetooth/beacon caveats for unsupported devices, disabled
-  radios, denied permissions, and simulator limitations.
+  notifications when changing or verifying behavior that depends on them.
+- Document NFC and Bluetooth/beacon caveats when touching those flows, including
+  unsupported devices, disabled radios, denied permissions, and simulator
+  limitations.

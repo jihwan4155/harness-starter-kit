@@ -5,6 +5,12 @@ Use these snippets when the target project is JavaScript or TypeScript.
 These files are agent reference material, not automatic transformations. Merge
 only the pieces that fit the target project's existing tools.
 
+Apply this profile by priority: always preserve the target package manager,
+generated-file rules, and exact local checks; document API/auth/service fixtures
+when present; consider decision records only when changing module boundaries,
+runtime, state, or integration policy; use a short report/check note for narrow
+fixes.
+
 ## Recommended Checks
 
 - ESLint for linting.

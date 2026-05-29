@@ -5,6 +5,12 @@ Use these snippets when the target project is a Spring Boot app or service.
 These files are agent reference material, not automatic transformations. Merge
 only the pieces that fit the target project's existing Maven or Gradle setup.
 
+Apply this profile by priority: always preserve the target Maven/Gradle wrapper,
+generated-file rules, and exact local checks; document database, migration, or
+service fixture setup when present; consider decision records only when changing
+module layout, persistence, migration, or integration policy; use a short
+report/check note for narrow fixes.
+
 ## Recommended Checks
 
 - `./mvnw test` or `./mvnw verify` for Maven wrapper projects.
@@ -42,9 +48,10 @@ When Spring Boot is introduced after generic adoption:
   generated paths, local config rules, migration rules, and completion checks.
 - Update `docs/conventions/coding.md` with package boundaries, controller,
   service, repository, DTO, configuration, testing, and migration conventions.
-- Add a decision record when choosing Spring Boot, Maven versus Gradle, module
-  layout, persistence approach, or Flyway/Liquibase policy is an architectural
-  decision.
+- Consider a decision record when changing or selecting Spring Boot, Maven
+  versus Gradle, module layout, persistence approach, or Flyway/Liquibase
+  policy. When the task only follows the existing architecture or makes a narrow
+  fix, a final report or check note is enough.
 - Treat Flyway or Liquibase migrations as source. Adopt profile guidance without
   deleting or rewriting migrations unless the maintainer explicitly asks.
 - In the final report, list which snippets were adopted, adapted, skipped, or

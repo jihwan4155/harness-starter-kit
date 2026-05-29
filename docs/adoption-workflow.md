@@ -37,6 +37,21 @@ manifests, and CI configs when they exist. If the target already has an
 equivalent docs or knowledge structure, use that structure instead of creating a
 parallel one.
 
+## Rule Priority
+
+Use this priority order when applying the workflow. Not every item applies to
+every task.
+
+- Always: preserve the target repository's existing architecture and tools,
+  document exact local checks, and protect generated files and local config.
+- When present: document how to run or verify local servers, database seeds,
+  Docker services, JARs, emulators, devices, or backend fixtures.
+- When touching that area: consider a decision record for auth, external APIs,
+  permissions, hardware, persistence, state management, or networking boundary
+  changes.
+- Broad feature work: write a small scenario test note. For narrow fixes, name
+  the relevant check or explain why build-only validation is enough.
+
 ## 2. Identify Existing Harness Pieces
 
 Many projects already have part of a harness:
@@ -125,12 +140,12 @@ Make the common path fast:
 - CI workflow only when it matches the target repository's CI provider
 - clear test names and error messages
 
-Before feature implementation, write a small scenario test plan or explicitly
-say why build-only validation is enough. The plan can be a compact matrix of
-user flows, setup data, server state, automated checks, and manual checks. For
-mobile or local-server projects, include endpoint readiness, seed data,
-emulator/device coverage, runtime permissions, and hardware-dependent flows such
-as NFC, Bluetooth, or beacons when relevant.
+Before broad feature implementation, write a small scenario test note or
+explicitly say why build-only validation is enough. The note can be a compact
+matrix of user flows, setup data, server state, automated checks, and manual
+checks. For mobile or local-server projects, include endpoint readiness, seed
+data, emulator/device coverage, runtime permissions, and hardware-dependent
+flows such as NFC, Bluetooth, or beacons when relevant.
 
 Agents improve fastest when feedback is quick and concrete.
 

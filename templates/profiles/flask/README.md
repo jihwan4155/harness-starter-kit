@@ -5,6 +5,11 @@ Use these snippets when the target project is a Flask app or API.
 These files are agent reference material, not automatic transformations. Merge
 only the pieces that fit the target project's existing tools.
 
+Apply this profile by priority: always preserve existing app structure and exact
+check commands; document local config, database, or fixture setup when present;
+consider decision records only when changing architecture, persistence, config,
+or extension policy; use a short report/check note for narrow fixes.
+
 ## Recommended Checks
 
 - `python -m unittest discover -s tests` for standard-library tests.
@@ -40,8 +45,10 @@ When Flask is introduced after generic adoption:
   command, source directories, generated paths, and completion checks.
 - Update `docs/conventions/coding.md` with app factory, blueprint, config,
   service, repository, testing, and error handling conventions.
-- Add a decision record when choosing Flask, app structure, config strategy,
-  persistence approach, or extension set is an architectural decision.
+- Consider a decision record when changing or selecting Flask, app structure,
+  config strategy, persistence approach, or extension set. When the task only
+  follows the existing architecture or makes a narrow fix, a final report or
+  check note is enough.
 - Keep optional local directories out of backtick path references unless they
   actually exist, so document drift checks stay useful.
 - In the final report, list which snippets were adopted, adapted, skipped, or

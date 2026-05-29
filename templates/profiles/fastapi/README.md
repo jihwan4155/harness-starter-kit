@@ -5,6 +5,11 @@ Use these snippets when the target project is a FastAPI app or API.
 These files are agent reference material, not automatic transformations. Merge
 only the pieces that fit the target project's existing tools.
 
+Apply this profile by priority: always preserve existing app layout and exact
+check commands; document database, auth, or fixture setup when present; consider
+decision records only when changing architecture, persistence, schema, or
+integration policy; use a short report/check note for narrow fixes.
+
 ## Recommended Checks
 
 - `pytest` for tests, or `python -m pytest` inside a virtual environment.
@@ -46,8 +51,10 @@ When FastAPI is introduced after generic adoption:
   directories, generated paths, and completion checks.
 - Update `docs/conventions/coding.md` with router, dependency injection,
   schema, service, repository, testing, and error handling conventions.
-- Add a decision record when choosing FastAPI, an app layout, persistence
-  approach, or migration tool is an architectural decision.
+- Consider a decision record when changing or selecting FastAPI, an app layout,
+  persistence approach, or migration tool. When the task only follows the
+  existing architecture or makes a narrow fix, a final report or check note is
+  enough.
 - In the final report, list which snippets were adopted, adapted, skipped, or
   deferred.
 

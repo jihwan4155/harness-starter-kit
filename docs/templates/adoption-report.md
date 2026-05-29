@@ -35,12 +35,16 @@ Result: TODO
   setup.
 - Verification performed: TODO: endpoint, log line, smoke test, emulator/device
   check, or reason it was not run.
+- Not applicable: TODO: explain when the target has no local server, fixture,
+  seed, emulator, or device dependency.
 
-## Feature Scenario Test Plan
+## Feature Scenario Test Note
 
+- Broad feature work: TODO: yes/no and why.
 - Build-only validation is enough: TODO: yes/no and why.
-- Scenarios covered before implementation: TODO: list user flows, API/server
-  state, automated checks, and manual checks.
+- Scenarios covered for broad feature work: TODO: list user flows, API/server
+  state, automated checks, and manual checks. For narrow fixes, name the
+  relevant check instead.
 - Manual or hardware-dependent checks: TODO: emulator/device, permissions, NFC,
   Bluetooth, beacon, camera, location, or other caveats.
 
@@ -57,7 +61,7 @@ Result: TODO
 - `docs/conventions/coding.md`: TODO
 - `docs/decisions/`: TODO
 - Behavior or integration decisions considered: TODO: explain whether a domain
-  note or ADR was the right durable artifact.
+  note, report/check note, or ADR was the right durable artifact.
 - Not updated: TODO: explain why if this adoption or change did not require a
   durable docs update.
 

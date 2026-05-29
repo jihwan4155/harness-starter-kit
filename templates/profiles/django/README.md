@@ -5,6 +5,11 @@ Use these snippets when the target project is a Django app or service.
 These files are agent reference material, not automatic transformations. Merge
 only the pieces that fit the target project's existing tools.
 
+Apply this profile by priority: always protect generated/local files and exact
+check commands; document database or fixture setup when present; consider
+decision records only when changing architecture, persistence, settings, or
+migration policy; use a short report/check note for narrow fixes.
+
 ## Recommended Checks
 
 - `python manage.py check` for Django system checks.
@@ -39,8 +44,10 @@ When Django is introduced after generic adoption:
   generated paths, migration rules, and completion checks.
 - Update `docs/conventions/coding.md` with app boundaries, model/queryset,
   view, serializer/form, service, testing, and migration conventions.
-- Add a decision record when choosing Django, app boundaries, settings layout,
-  persistence approach, or migration policy is an architectural decision.
+- Consider a decision record when changing or selecting Django, app boundaries,
+  settings layout, persistence approach, or migration policy. When the task only
+  follows the existing architecture or makes a narrow fix, a final report or
+  check note is enough.
 - Treat existing migrations as source. Adopt profile guidance without deleting
   or rewriting migrations unless the maintainer explicitly asks.
 - In the final report, list which snippets were adopted, adapted, skipped, or

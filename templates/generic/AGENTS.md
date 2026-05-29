@@ -35,6 +35,17 @@ Document the important source boundaries.
 - Add or update tests for behavior changes.
 - Remove temporary debugging code before finishing.
 
+## Rule Priority
+
+- Always preserve existing architecture and tools, document exact local checks,
+  and protect generated files and local config.
+- When present, document how to run or verify local servers, database seeds,
+  Docker services, JARs, emulators, devices, or backend fixtures.
+- When touching auth, external APIs, permissions, hardware, persistence, state,
+  or networking boundaries, consider whether `docs/decisions/` needs an ADR.
+- For broad feature work, write a small scenario test note. For narrow fixes,
+  name the relevant check or explain why build-only validation is enough.
+
 ## Architecture Constraints
 
 TODO: list constraints that should be enforced by lint, type checks, tests, or
@@ -92,10 +103,10 @@ Prefer:
 - `docs/failures/*.md` only when an attempted approach failed and should not be
   repeated.
 
-If a feature change adds or changes a local server, database seed, external API,
-runtime permission, hardware-dependent behavior, or other integration boundary,
-decide whether the durable record belongs in `docs/domain/` or
-`docs/decisions/` before finishing.
+If a broad feature change adds or changes a local server, database seed,
+external API, runtime permission, hardware-dependent behavior, or other
+integration boundary, decide whether the durable record belongs in
+`docs/domain/`, `docs/decisions/`, or the final report before finishing.
 
 If no `docs/` file is updated for a non-trivial code change, explicitly explain
 why in the final report.
@@ -135,8 +146,8 @@ why in the final report.
 Before reporting completion:
 
 - Run the documented checks that are relevant to the change.
-- For local-server, emulator, device, or hardware-dependent work, document the
-  scenario test plan or explain why build-only validation is enough.
+- For broad local-server, emulator, device, or hardware-dependent work, document
+  the scenario test note or explain why build-only validation is enough.
 - Confirm no temporary files were left behind.
 - Update docs when behavior, architecture, commands, or known failures changed.
 - Update the harness effectiveness measurement plan when the change affects

@@ -6,6 +6,11 @@ Nuxt, or a similar client-side project.
 These files are agent reference material, not automatic transformations. Merge
 only the pieces that fit the target project's existing tools.
 
+Apply this profile by priority: always preserve the target package manager,
+generated-file rules, and exact local checks; document API/auth setup when
+present; consider decision records only when changing routing, state, rendering,
+or integration policy; use a short report/check note for narrow fixes.
+
 ## Recommended Checks
 
 - `npm run lint` for ESLint including eslint-plugin-vue rules.
@@ -49,8 +54,10 @@ When Vue or Vite is introduced after generic adoption:
   paths, and completion checks.
 - Update `docs/conventions/coding.md` with component, state, routing, styling,
   and testing conventions.
-- Add a decision record when choosing Vue/Vite, a routing approach, or a state
-  management approach is an architectural decision.
+- Consider a decision record when changing or selecting Vue/Vite, a routing
+  approach, or a state management approach. When the task only follows the
+  existing architecture or makes a narrow fix, a final report or check note is
+  enough.
 - In the final report, list which snippets were adopted, adapted, skipped, or
   deferred.
 

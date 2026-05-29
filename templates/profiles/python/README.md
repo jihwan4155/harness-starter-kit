@@ -5,6 +5,12 @@ Use these snippets when the target project is Python.
 These files are agent reference material, not automatic transformations. Merge
 only the pieces that fit the target project's existing tools.
 
+Apply this profile by priority: always preserve the target environment workflow
+and exact local checks; document database, service, or fixture setup when
+present; consider decision records only when changing package manager, test
+runner, typing strategy, layout, or framework; use a short report/check note for
+narrow fixes.
+
 ## Recommended Checks
 
 - Ruff for linting and formatting
@@ -36,7 +42,9 @@ When Python is introduced after generic adoption:
   directories, generated paths, and completion checks.
 - Update `docs/conventions/coding.md` with module layout, typing, testing,
   import, error handling, logging, and dependency conventions.
-- Add a decision record when choosing a package manager, test runner, typing
-  strategy, app layout, or framework is an architectural decision.
+- Consider a decision record when changing or selecting a package manager, test
+  runner, typing strategy, app layout, or framework. When the task only follows
+  the existing architecture or makes a narrow fix, a final report or check note
+  is enough.
 - In the final report, list which snippets were adopted, adapted, skipped, or
   deferred.

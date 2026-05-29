@@ -6,6 +6,11 @@ Router project.
 These files are agent reference material, not automatic transformations. Merge
 only the pieces that fit the target project's existing tools.
 
+Apply this profile by priority: always preserve the target package manager,
+generated-file rules, and exact local checks; document external API/auth setup
+when present; consider decision records only when changing router, runtime,
+state, or integration policy; use a short report/check note for narrow fixes.
+
 ## Recommended Checks
 
 - `next build` for production build validation.
@@ -44,8 +49,10 @@ When Next.js is introduced after generic adoption:
   paths, route conventions, and completion checks.
 - Update `docs/conventions/coding.md` with App Router, data fetching, component
   boundary, styling, and testing conventions.
-- Add a decision record when choosing Next.js, an app/router structure, runtime
-  strategy, or state management approach is an architectural decision.
+- Consider a decision record when changing or selecting Next.js, an app/router
+  structure, runtime strategy, or state management approach. When the task only
+  follows the existing architecture or makes a narrow fix, a final report or
+  check note is enough.
 - In the final report, list which snippets were adopted, adapted, skipped, or
   deferred.
 
