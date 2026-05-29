@@ -160,6 +160,7 @@ use [`docs/checklists/profile-absorption.md`](docs/checklists/profile-absorption
 ## Documentation Map
 
 - Overview: [`docs/overview.md`](docs/overview.md)
+- Roadmap: [`ROADMAP.md`](ROADMAP.md)
 - Adoption workflow: [`docs/adoption-workflow.md`](docs/adoption-workflow.md)
 - Harness refresh workflow: [`commands/harness-refresh.md`](commands/harness-refresh.md)
 - Full adoption prompt: [`docs/prompts/apply-to-target-repo.md`](docs/prompts/apply-to-target-repo.md)
