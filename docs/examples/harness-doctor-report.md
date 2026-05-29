@@ -1,15 +1,16 @@
 # Harness Doctor Example Reports
 
-These examples show the expected report shape. Scores are illustrative; real
-scores must come from inspecting durable repository evidence.
+These examples show the expected report shape. Scores are illustrative baseline
+evidence scans; real scores must come from inspecting durable repository
+evidence and reviewing content quality.
 
 ## Weak Repository Example
 
 ```text
 Harness Doctor Report
 
-Score: 48/100
-Grade: D
+Score: 48/100 (baseline evidence scan)
+Grade: D (baseline)
 
 Verdict:
 This repository has a few useful project notes, but most agent guidance still
@@ -53,8 +54,8 @@ Recommended Next Actions:
 ```text
 Harness Doctor Report
 
-Score: 82/100
-Grade: B+
+Score: 82/100 (baseline evidence scan)
+Grade: B+ (baseline)
 
 Verdict:
 This repository has a strong practical harness. A new agent can find project

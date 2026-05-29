@@ -267,16 +267,16 @@ def grade(score: int) -> str:
 
 def verdict(score: int) -> str:
     if score >= 90:
-        return "Production-ready harness"
+        return "Production-ready baseline evidence"
     if score >= 80:
-        return "Strong harness"
+        return "Strong baseline evidence"
     if score >= 70:
-        return "Useful but incomplete"
+        return "Useful but incomplete baseline evidence"
     if score >= 60:
-        return "Basic harness"
+        return "Basic baseline evidence"
     if score >= 40:
-        return "Mostly ad-hoc"
-    return "No durable agent harness"
+        return "Mostly ad-hoc baseline evidence"
+    return "Little durable baseline evidence"
 
 
 def score_repository(root: Path) -> list[Category]:
@@ -493,11 +493,14 @@ def print_report(root: Path, categories: list[Category]) -> None:
     score = sum(category.score for category in categories)
     print("Harness Doctor Report")
     print()
-    print(f"Score: {score}/100")
-    print(f"Grade: {grade(score)}")
+    print(f"Score: {score}/100 (baseline evidence scan)")
+    print(f"Grade: {grade(score)} (baseline)")
     print()
     print("Verdict:")
-    print(f"{verdict(score)}. This baseline is based on file and text evidence; review content quality before treating it as final.")
+    print(
+        f"{verdict(score)}. This scan checks durable files and text patterns; "
+        "review content quality before treating it as final."
+    )
     print()
     print("Breakdown:")
     for category in categories:
