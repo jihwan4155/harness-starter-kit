@@ -81,9 +81,10 @@ Expected result:
 
 ### `/harness doctor`
 
-Harness Doctor 用于评估仓库是否已准备好与 AI coding agent 稳定协作。它会从
-Agent Instructions、Feedback Loops、Durable Memory、Structural Safety、
-Adoption Clarity 生成 Harness Score。
+Harness Doctor 用于评估仓库与 AI coding agent 稳定协作所需的 baseline
+evidence。它会从 Agent Instructions、Feedback Loops、Durable Memory、
+Structural Safety、Adoption Clarity 生成 5-category Harness Score；agent
+effectiveness 和 governance maturity 属于 non-scored manual review。
 
 - Command workflow: [`commands/harness-doctor.md`](commands/harness-doctor.md)
 - Rubric: [`docs/scoring/harness-score-rubric.md`](docs/scoring/harness-score-rubric.md)
@@ -140,6 +141,7 @@ Profile 是保守参考资料，不是自动转换规则。只采用符合目标
 ## 文档地图
 
 - Overview: [`docs/overview.md`](docs/overview.md)
+- Theory: [`docs/theory/harness-engineering.md`](docs/theory/harness-engineering.md)
 - Adoption workflow: [`docs/adoption-workflow.md`](docs/adoption-workflow.md)
 - Full adoption prompt: [`docs/prompts/apply-to-target-repo.md`](docs/prompts/apply-to-target-repo.md)
 - Component map: [`docs/component-map.md`](docs/component-map.md)
@@ -163,6 +165,8 @@ runnable drift checks。Coverage details 和 opt-in E2E checks 见
 comparable tasks、wrong-file edits、first-pass verification 和 human rework，请使用
 [`docs/evaluation.md`](docs/evaluation.md) 与
 [`docs/templates/effectiveness-report.md`](docs/templates/effectiveness-report.md)。
+个别手动 task outcome record 请使用
+[`docs/templates/task-outcome.yaml`](docs/templates/task-outcome.yaml)。
 
 ## 本地检查
 

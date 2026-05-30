@@ -55,6 +55,7 @@ improvement would be adding behavior tests for real app logic.
   success.
 - Review window: next 5 comparable Django agent changes.
 - Results location: `docs/effectiveness/django-harness.md`.
+- Task outcome records location: `docs/effectiveness/task-outcomes/`.
 
 ## Remaining Manual Steps
 

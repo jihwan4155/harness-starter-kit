@@ -55,6 +55,7 @@ All checks passed.
   success.
 - Review window: next 5 comparable Spring agent changes.
 - Results location: `docs/effectiveness/spring-harness.md`.
+- Task outcome records location: `docs/effectiveness/task-outcomes/`.
 
 ## Remaining Manual Steps
 

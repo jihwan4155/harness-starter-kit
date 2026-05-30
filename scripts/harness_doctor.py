@@ -526,7 +526,10 @@ def print_report(root: Path, categories: list[Category]) -> None:
         print("- No missing baseline items detected.")
     print()
     print("Note:")
-    print("This script does not modify files and does not replace agent judgment.")
+    print(
+        "This script does not modify files, does not replace agent judgment, "
+        "and does not score agent effectiveness, task outcomes, or governance maturity."
+    )
 
 
 def main() -> int:

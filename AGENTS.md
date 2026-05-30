@@ -49,6 +49,7 @@ inspect these first when they exist:
 - `README.md`
 - `AGENTS.md`
 - `.harness/source.json`
+- `docs/theory/`
 - `docs/decisions/`
 - `docs/conventions/`
 - `docs/domain/`

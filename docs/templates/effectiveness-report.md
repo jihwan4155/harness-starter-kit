@@ -31,6 +31,13 @@
 | --- | --- | ---: | --- | --- |
 | TODO | TODO | TODO | TODO | TODO |
 
+## Source Records
+
+- Task outcome records reviewed: TODO: list `docs/effectiveness/task-outcomes/...`
+- Repository refs compared: TODO
+- Prompt refs compared: TODO
+- Verification commands compared: TODO
+
 ## Interpretation
 
 - What improved: TODO

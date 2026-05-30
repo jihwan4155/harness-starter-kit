@@ -48,6 +48,11 @@ parallel one.
 Use this priority order when applying the workflow. Not every item applies to
 every task.
 
+When a harness gap appears, use the decision table in
+`docs/theory/harness-engineering.md` to decide whether the next durable artifact
+should be instructions, constraints, feedback, memory, evaluation, or
+governance. Do not add every artifact by default.
+
 - Always: preserve the target repository's existing architecture and tools,
   document exact local checks, and protect generated files and local config.
 - When present: document how to run or verify local servers, database seeds,
@@ -211,7 +216,9 @@ The report should also include an effectiveness measurement plan. Use
 data exists, record harnessed-only tracking as the initial mode and name the
 next comparable tasks, primary metric, review window, and results location.
 Actual results should be recorded later with
-`docs/templates/effectiveness-report.md`.
+`docs/templates/effectiveness-report.md`. Individual task outcomes can be
+recorded with `docs/templates/task-outcome.yaml` and stored under the target
+repository's docs/effectiveness/task-outcomes directory.
 
 When the adoption report is saved as a file, run
 `scripts/check_effectiveness_plan.py --require-report` to catch missing sections

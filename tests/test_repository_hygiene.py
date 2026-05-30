@@ -49,6 +49,9 @@ class RepositoryHygieneTests(unittest.TestCase):
         adoption_prompt = (
             REPO_ROOT / "docs" / "prompts" / "apply-to-target-repo.md"
         ).read_text(encoding="utf-8")
+        adoption_workflow = (
+            REPO_ROOT / "docs" / "adoption-workflow.md"
+        ).read_text(encoding="utf-8")
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
 
         self.assertIn("## Effectiveness Measurement Plan", adoption_report)
@@ -56,10 +59,65 @@ class RepositoryHygieneTests(unittest.TestCase):
         self.assertIn("Baseline available", adoption_report)
         self.assertIn("Primary metric", adoption_report)
         self.assertIn("Results location", adoption_report)
+        self.assertIn("Task outcome records location", adoption_report)
         self.assertIn("effectiveness measurement plan", agent_template)
         self.assertIn("Effectiveness Measurement Plan", adoption_prompt)
         self.assertIn("They do not prove", readme)
         self.assertIn("docs/evaluation.md", readme)
+
+    def test_theory_model_separates_health_from_effectiveness(self) -> None:
+        theory = (REPO_ROOT / "docs" / "theory" / "harness-engineering.md").read_text(
+            encoding="utf-8"
+        )
+        readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+        overview = (REPO_ROOT / "docs" / "overview.md").read_text(encoding="utf-8")
+        evaluation = (REPO_ROOT / "docs" / "evaluation.md").read_text(
+            encoding="utf-8"
+        )
+        rubric = (
+            REPO_ROOT / "docs" / "scoring" / "harness-score-rubric.md"
+        ).read_text(encoding="utf-8")
+        doctor_command = (REPO_ROOT / "commands" / "harness-doctor.md").read_text(
+            encoding="utf-8"
+        )
+        root_agents = (REPO_ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        task_outcome = (
+            REPO_ROOT / "docs" / "templates" / "task-outcome.yaml"
+        ).read_text(encoding="utf-8")
+
+        for text in (theory, readme, overview):
+            self.assertIn(
+                "Instructions + Constraints + Feedback + Memory + Evaluation + Governance",
+                text,
+            )
+
+        self.assertIn("Harness health", theory)
+        self.assertIn("Agent effectiveness", theory)
+        self.assertIn("operational model", theory)
+        self.assertIn("## How To Use This Model", theory)
+        self.assertIn("Add or update", theory)
+        self.assertIn("prefer enforceable constraints and feedback", theory)
+        self.assertIn("not justify adding every artifact", theory)
+        self.assertIn("does not prove", theory)
+        self.assertIn("Harness Doctor", evaluation)
+        self.assertIn("repository ref", evaluation)
+        self.assertIn("verification command", evaluation)
+        self.assertIn("task-outcome.yaml", evaluation)
+        self.assertIn("agent effectiveness score", rubric)
+        self.assertIn("Score Scope", rubric)
+        self.assertIn("not proof of agent effectiveness", doctor_command)
+        self.assertIn("Non-Scored Manual Review", doctor_command)
+        self.assertIn("governance maturity", doctor_command)
+        self.assertIn("docs/theory/", root_agents)
+        self.assertIn("docs/effectiveness/task-outcomes", evaluation)
+        self.assertIn("repository_ref", task_outcome)
+        self.assertIn("prompt_ref", task_outcome)
+        self.assertIn("run_id", task_outcome)
+        self.assertIn("reviewer", task_outcome)
+        self.assertIn("verification_command", task_outcome)
+        self.assertIn("harness_doctor_score", task_outcome)
+        self.assertIn("not effectiveness proof", task_outcome)
+        self.assertIn("docs/effectiveness/task-outcomes", task_outcome)
 
     def test_failure_memory_is_required_for_fixed_harness_failures(self) -> None:
         root_agents = (REPO_ROOT / "AGENTS.md").read_text(encoding="utf-8")
@@ -193,8 +251,10 @@ class RepositoryHygieneTests(unittest.TestCase):
                 text = (REPO_ROOT / filename).read_text(encoding="utf-8")
                 self.assertIn("docs/adoption-workflow.md", text)
                 self.assertIn("docs/prompts/apply-to-target-repo.md", text)
+                self.assertIn("docs/theory/harness-engineering.md", text)
                 self.assertIn("docs/validation.md", text)
                 self.assertIn("docs/evaluation.md", text)
+                self.assertIn("docs/templates/task-outcome.yaml", text)
                 self.assertIn("/harness update", text)
                 self.assertIn("/harness refresh", text)
 

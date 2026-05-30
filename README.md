@@ -79,13 +79,30 @@ For the full prompt and workflow details, see
 [`docs/prompts/apply-to-target-repo.md`](docs/prompts/apply-to-target-repo.md)
 and [`docs/adoption-workflow.md`](docs/adoption-workflow.md).
 
+## Harness Theory
+
+Harness engineering treats the repository as the durable operating environment
+for coding agents:
+
+```text
+Harness = Instructions + Constraints + Feedback + Memory + Evaluation + Governance
+```
+
+Harness health is different from agent effectiveness. Harness Doctor can scan
+for durable repository evidence, but it cannot prove that agents make fewer
+mistakes. Measure that separately with task outcomes and effectiveness reports.
+See [`docs/theory/harness-engineering.md`](docs/theory/harness-engineering.md)
+for the model.
+
 ## Commands
 
 ### `/harness doctor`
 
-Run Harness Doctor to evaluate how ready a repository is for reliable AI coding
-agent collaboration. It reports a Harness Score across Agent Instructions,
-Feedback Loops, Durable Memory, Structural Safety, and Adoption Clarity.
+Run Harness Doctor to evaluate baseline repository evidence for reliable AI
+coding agent collaboration. It reports a five-category Harness Score across
+Agent Instructions, Feedback Loops, Durable Memory, Structural Safety, and
+Adoption Clarity; agent effectiveness and governance maturity remain non-scored
+manual review items.
 
 - Command workflow: [`commands/harness-doctor.md`](commands/harness-doctor.md)
 - Rubric: [`docs/scoring/harness-score-rubric.md`](docs/scoring/harness-score-rubric.md)
@@ -161,6 +178,7 @@ use [`docs/checklists/profile-absorption.md`](docs/checklists/profile-absorption
 ## Documentation Map
 
 - Overview: [`docs/overview.md`](docs/overview.md)
+- Theory: [`docs/theory/harness-engineering.md`](docs/theory/harness-engineering.md)
 - Roadmap: [`ROADMAP.md`](ROADMAP.md)
 - Adoption workflow: [`docs/adoption-workflow.md`](docs/adoption-workflow.md)
 - Harness refresh workflow: [`commands/harness-refresh.md`](commands/harness-refresh.md)
@@ -186,8 +204,9 @@ failure memory, and effectiveness tracking in a real repository.
 They do not prove that harness adoption reduces repeated agent mistakes. Use
 [`docs/evaluation.md`](docs/evaluation.md) and
 [`docs/templates/effectiveness-report.md`](docs/templates/effectiveness-report.md)
-to measure comparable tasks, wrong-file edits, first-pass verification, and
-human rework.
+or [`docs/templates/task-outcome.yaml`](docs/templates/task-outcome.yaml) to
+measure comparable tasks, wrong-file edits, first-pass verification, and human
+rework.
 
 ## Local Checks
 

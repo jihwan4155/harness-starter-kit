@@ -8,6 +8,23 @@ that drift checks can run. They do not prove that the harness improves agent
 outcomes. Effectiveness should be measured with comparable tasks before and
 after adoption, or with harnessed-only tracking when no baseline is available.
 
+## Two Measurement Layers
+
+Keep these layers separate:
+
+- Harness health: automatically measurable repository evidence, such as durable
+  agent instructions, runnable checks, drift scripts, CI wiring, source
+  tracking, and complete adoption reports. Harness Doctor and local validation
+  checks belong here.
+- Agent effectiveness: human-recorded task outcomes, such as wrong-file edits,
+  repeated known mistakes, first-pass verification, drift detections, human
+  rework, and reverted files. Effectiveness reports and task outcome records
+  belong here.
+
+A healthier harness can make better agent outcomes more likely, but it is not
+proof of those outcomes. Do not treat a Harness Doctor score, fixture test, or
+passing drift check as evidence that agents made fewer mistakes.
+
 ## Evaluation Questions
 
 - Did agents edit fewer wrong files?
@@ -50,8 +67,13 @@ harnessed-only tracking until there is a later comparison point.
    criteria for each comparable run.
 5. Record observable outcomes only. Do not count intentions or explanations as
    successful behavior.
-6. Store results in an effectiveness report using
-   `docs/templates/effectiveness-report.md`.
+6. Store aggregate results in an effectiveness report using
+   `docs/templates/effectiveness-report.md`. For individual manual observations,
+   copy `docs/templates/task-outcome.yaml` and store filled records under the
+   target repository's docs/effectiveness/task-outcomes directory.
+7. For each task outcome record, include the repository ref, prompt reference,
+   run id, reviewer, harness source, and verification command so later reviewers
+   can tell whether two runs are actually comparable.
 
 ## Minimum Adoption-Time Plan
 

@@ -15,7 +15,16 @@ copy after the report is complete.
 
 Inspect the repository and produce a Harness Score out of 100. The score should
 identify weak points where AI coding agents are likely to repeat mistakes across
-sessions.
+sessions. It is a harness health diagnostic, not proof of agent effectiveness
+or mistake reduction.
+
+## Scope
+
+Harness Doctor scores five baseline evidence categories. It does not score the
+entire six-part model in `docs/theory/harness-engineering.md`: task outcome
+evidence, agent effectiveness, `.harness/source.json`, `/harness update`,
+`/harness refresh`, and other governance maturity signals are non-scored manual
+review items.
 
 Use this principle when judging the repository:
 
@@ -43,7 +52,8 @@ Use this principle when judging the repository:
    review content quality and enforceability yourself.
 
 6. Score the repository across the five categories below.
-7. Produce the required report format.
+7. Review non-scored evaluation and governance signals when present.
+8. Produce the required report format.
 
 ## Scoring Rules
 
@@ -92,6 +102,10 @@ Evidence:
 - <durable evidence found in the repository>
 - <durable evidence found in the repository>
 - <missing or weak evidence that affected the score>
+
+Non-Scored Manual Review:
+- Evaluation evidence: <task outcomes, effectiveness reports, or none found>
+- Governance evidence: <source tracking, update/refresh workflow evidence, or none found>
 
 Top Risks:
 1. <highest-impact risk>

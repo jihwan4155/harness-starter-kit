@@ -21,14 +21,24 @@ implicit architecture, taste, history, or rejected approaches.
 
 A harness turns that implicit context into repository artifacts.
 
-## The Four Core Components
+For the fuller model and its relationship to test harnesses, CI, ADRs, failure
+memory, agent evaluation, and governance loops, see
+[`docs/theory/harness-engineering.md`](theory/harness-engineering.md).
+
+## Core Model
+
+```text
+Harness = Instructions + Constraints + Feedback + Memory + Evaluation + Governance
+```
 
 | Component | Role | Typical Files |
 | --- | --- | --- |
-| Instruction document | Tells the agent how to behave | `AGENTS.md`, `CLAUDE.md` |
-| Architecture constraints | Blocks invalid structure | linters, type checks, import rules |
-| Feedback loops | Corrects behavior quickly | tests, CI, pre-commit, examples |
-| Knowledge store | Preserves decisions and context | `docs/decisions`, `docs/failures` |
+| Instructions | Tells the agent how to behave | `AGENTS.md`, `CLAUDE.md` |
+| Constraints | Blocks invalid structure | linters, type checks, import rules |
+| Feedback | Corrects behavior quickly | tests, CI, pre-commit, examples |
+| Memory | Preserves decisions and context | `docs/decisions`, `docs/failures` |
+| Evaluation | Separates harness health from agent outcomes | Harness Doctor, effectiveness reports |
+| Governance | Keeps the harness current without blind overwrites | `/harness update`, `/harness refresh` |
 
 This starter kit also includes garbage collection, which keeps the harness from
 drifting over time.

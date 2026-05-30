@@ -81,9 +81,10 @@ Expected result:
 
 ### `/harness doctor`
 
-Harness Doctor는 저장소가 AI 코딩 에이전트와 안정적으로 협업할 준비가 되었는지
-평가합니다. Agent Instructions, Feedback Loops, Durable Memory, Structural
-Safety, Adoption Clarity를 기준으로 Harness Score를 보고합니다.
+Harness Doctor는 저장소가 AI 코딩 에이전트와 안정적으로 협업하기 위한 baseline
+evidence를 평가합니다. Agent Instructions, Feedback Loops, Durable Memory,
+Structural Safety, Adoption Clarity의 5개 category Harness Score를 보고하며,
+agent effectiveness와 governance maturity는 non-scored manual review 항목입니다.
 
 - 명령 workflow: [`commands/harness-doctor.md`](commands/harness-doctor.md)
 - 채점 rubric: [`docs/scoring/harness-score-rubric.md`](docs/scoring/harness-score-rubric.md)
@@ -143,6 +144,7 @@ Profile은 보수적인 참고 자료이며 자동 변환 규칙이 아닙니다
 ## 문서 지도
 
 - Overview: [`docs/overview.md`](docs/overview.md)
+- Theory: [`docs/theory/harness-engineering.md`](docs/theory/harness-engineering.md)
 - Adoption workflow: [`docs/adoption-workflow.md`](docs/adoption-workflow.md)
 - Full adoption prompt: [`docs/prompts/apply-to-target-repo.md`](docs/prompts/apply-to-target-repo.md)
 - Component map: [`docs/component-map.md`](docs/component-map.md)
@@ -166,7 +168,8 @@ memory, effectiveness tracking을 실제 저장소에서 검증합니다.
 않습니다. 비교 가능한 작업, wrong-file edits, first-pass verification, human
 rework 측정은 [`docs/evaluation.md`](docs/evaluation.md)와
 [`docs/templates/effectiveness-report.md`](docs/templates/effectiveness-report.md)를
-사용하세요.
+사용하세요. 개별 수동 task outcome record에는
+[`docs/templates/task-outcome.yaml`](docs/templates/task-outcome.yaml)을 사용하세요.
 
 ## 로컬 검사
 

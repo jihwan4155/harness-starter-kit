@@ -95,6 +95,7 @@ automatically.
   first-pass `npm.cmd run check:harness` success.
 - Review window: next 5 comparable Node.js agent changes.
 - Results location: `docs/effectiveness/node-harness.md`.
+- Task outcome records location: `docs/effectiveness/task-outcomes/`.
 
 ## Remaining Manual Steps
 

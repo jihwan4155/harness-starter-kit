@@ -89,6 +89,7 @@ why and define the next observable event.
 - Primary metric: TODO
 - Review window: TODO
 - Results location: TODO
+- Task outcome records location: TODO: usually docs/effectiveness/task-outcomes/
 
 ## Assumptions
 

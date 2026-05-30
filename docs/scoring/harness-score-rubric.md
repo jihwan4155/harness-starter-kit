@@ -16,6 +16,14 @@ memory, or validation loops are missing from the repository.
 - Give 0 when evidence is absent, only implied, or known only from conversation.
 - Record missing evidence in the report so the maintainer knows what to improve.
 
+## Score Scope
+
+This 100-point score covers five baseline evidence categories. It is not a full
+score for every part of the model in `docs/theory/harness-engineering.md`.
+Evaluation outcomes, `.harness/source.json`, `/harness update`,
+`/harness refresh`, and governance maturity should be reviewed as non-scored
+manual evidence.
+
 ## 1. Agent Instructions / 20
 
 Evaluate whether the repository has durable instructions for AI coding agents.
@@ -175,20 +183,23 @@ What does not count:
 ## Grade Scale
 
 ```text
-90-100: A / Production-ready harness
-80-89: B+ / Strong harness
-70-79: B / Useful but incomplete
-60-69: C / Basic harness
-40-59: D / Mostly ad-hoc
-0-39: F / No durable agent harness
+90-100: A / Production-ready baseline evidence
+80-89: B+ / Strong baseline evidence
+70-79: B / Useful but incomplete baseline evidence
+60-69: C / Basic baseline evidence
+40-59: D / Mostly ad-hoc baseline evidence
+0-39: F / Little durable baseline evidence
 ```
 
 ## Interpreting Results
 
-A high score does not mean the project has perfect documentation. It means the
-repository has enough durable instructions, constraints, memory, and validation
-loops that a new coding agent can work without depending on session-scoped
-context.
+A high score does not mean the project has perfect documentation, and it is not
+an agent effectiveness score. It means the repository has enough durable
+instructions, constraints, memory, and validation loops that a new coding agent
+can work without depending on session-scoped context.
+
+Do not use the score as proof that agents make fewer mistakes. Measure that
+with comparable task outcomes and effectiveness reports.
 
 A low score is not a failure. It is a map of where to add the next durable
 harness artifact.

@@ -20,6 +20,7 @@ COMPLETE_ADOPTION_REPORT = """# Adoption Report
 - Primary metric: wrong-file edits and first-pass verification success.
 - Review window: next 5 comparable agent changes.
 - Results location: `docs/effectiveness/harness.md`.
+- Task outcome records location: `docs/effectiveness/task-outcomes/`.
 """
 
 

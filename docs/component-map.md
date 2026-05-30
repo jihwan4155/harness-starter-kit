@@ -4,6 +4,7 @@ This map connects harness engineering concepts to files in a target repository.
 
 | Harness Concept | Target Repo Artifact | Starter Template |
 | --- | --- | --- |
+| Harness theory | practical model for repository-level agent support | `docs/theory/harness-engineering.md` |
 | Agent instructions | `AGENTS.md` | `templates/generic/AGENTS.md` |
 | Architecture decisions | `docs/decisions/*.md` | `templates/generic/docs/decisions/000-template.md` |
 | Failure memory | `docs/failures/*.md` | `templates/generic/docs/failures/000-template.md` |
@@ -23,6 +24,7 @@ This map connects harness engineering concepts to files in a target repository.
 | Profile absorption | checklist for turning profile snippets into project rules | `docs/checklists/profile-absorption.md` |
 | Adoption report example | final adoption summary | `docs/templates/adoption-report.md`, `examples/*-adoption-report.md` |
 | Effectiveness evaluation | agent mistake reduction measurement | `docs/evaluation.md`, `docs/templates/effectiveness-report.md` |
+| Task outcome record | `docs/effectiveness/task-outcomes/*.yaml` | `docs/templates/task-outcome.yaml` |
 | Validation coverage | tests, smoke checks, and E2E coverage notes | `docs/validation.md` |
 | Lifecycle pilot results | prompt-first adoption behavior evidence | `docs/examples/lifecycle-pilot-results.md` |
 

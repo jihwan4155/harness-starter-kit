@@ -37,6 +37,7 @@ ADOPTION_FIELDS = (
     "Primary metric",
     "Review window",
     "Results location",
+    "Task outcome records location",
 )
 
 EFFECTIVENESS_SECTIONS = (

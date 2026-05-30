@@ -55,6 +55,7 @@ All checks passed.
   `scripts/check_harness.py` success.
 - Review window: next 5 comparable Flask agent changes.
 - Results location: `docs/effectiveness/flask-harness.md`.
+- Task outcome records location: `docs/effectiveness/task-outcomes/`.
 
 ## Remaining Manual Steps
 
