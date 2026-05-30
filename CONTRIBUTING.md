@@ -24,7 +24,8 @@ See [`ROADMAP.md`](ROADMAP.md) for the current project direction.
 
 ## Development
 
-Use Python 3.11 or newer for local validation. Before opening a pull request,
+Use Python 3.11 or newer for local validation. On macOS/Linux, use `python3`
+instead of `python` when `python` is unavailable. Before opening a pull request,
 run:
 
 ```powershell

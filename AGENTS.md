@@ -94,7 +94,22 @@ Use `docs/adoption-workflow.md` for the full procedure. The short version:
 ## Validation
 
 Run these checks after changing installer behavior, templates, command
-workflows, or drift scripts. Use `python3` if `python` is not available.
+workflows, or drift scripts. Use the command block that matches the local Python
+entrypoint.
+
+macOS/Linux:
+
+```bash
+python3 -m unittest discover -s tests
+python3 -m py_compile scripts/apply_harness.py scripts/check_docs_drift.py scripts/check_structure.py scripts/check_encoding_hygiene.py scripts/check_effectiveness_plan.py scripts/harness_doctor.py
+python3 scripts/check_docs_drift.py
+python3 scripts/check_structure.py
+python3 scripts/check_encoding_hygiene.py
+python3 scripts/check_effectiveness_plan.py
+python3 scripts/harness_doctor.py --target .
+```
+
+Windows PowerShell, or any environment where `python` is configured:
 
 ```powershell
 python -m unittest discover -s tests

@@ -8,7 +8,8 @@ agent mistakes; measure that separately with `docs/evaluation.md`.
 ## Local Validation
 
 Run these checks before changing starter-kit templates, installer behavior,
-drift scripts, command documents, or README structure:
+drift scripts, command documents, or README structure. On macOS/Linux, use
+`python3` instead of `python` when `python` is unavailable:
 
 ```powershell
 python -m unittest discover -s tests

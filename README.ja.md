@@ -89,7 +89,8 @@ Safety、Adoption Clarity に基づいて Harness Score を報告します。
 - Rubric: [`docs/scoring/harness-score-rubric.md`](docs/scoring/harness-score-rubric.md)
 - Example report: [`docs/examples/harness-doctor-report.md`](docs/examples/harness-doctor-report.md)
 
-客観的な baseline scan:
+客観的な baseline scan です。macOS/Linux で `python` が使えない場合は
+`python3` を使ってください。
 
 ```powershell
 python scripts/harness_doctor.py --target .
@@ -173,7 +174,8 @@ verification、human rework の測定には
 ## ローカルチェック
 
 starter-kit templates、command workflows、installer behavior、drift scripts を
-変更する前に、次の checks を実行してください。
+変更する前に、次の checks を実行してください。macOS/Linux で `python` が
+使えない場合は `python3` を使ってください。
 
 ```powershell
 python -m unittest discover -s tests

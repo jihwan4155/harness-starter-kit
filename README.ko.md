@@ -89,7 +89,8 @@ Safety, Adoption Clarity를 기준으로 Harness Score를 보고합니다.
 - 채점 rubric: [`docs/scoring/harness-score-rubric.md`](docs/scoring/harness-score-rubric.md)
 - 예시 report: [`docs/examples/harness-doctor-report.md`](docs/examples/harness-doctor-report.md)
 
-객관적인 baseline scan:
+객관적인 baseline scan입니다. macOS/Linux에서 `python`이 없으면 `python3`를
+사용하세요.
 
 ```powershell
 python scripts/harness_doctor.py --target .
@@ -170,7 +171,8 @@ rework 측정은 [`docs/evaluation.md`](docs/evaluation.md)와
 ## 로컬 검사
 
 starter-kit template, command workflow, installer behavior, drift script를 바꾸기
-전에는 아래 검사를 실행하세요.
+전에는 아래 검사를 실행하세요. macOS/Linux에서 `python`이 없으면 `python3`를
+사용하세요.
 
 ```powershell
 python -m unittest discover -s tests

@@ -91,7 +91,8 @@ Feedback Loops, Durable Memory, Structural Safety, and Adoption Clarity.
 - Rubric: [`docs/scoring/harness-score-rubric.md`](docs/scoring/harness-score-rubric.md)
 - Example report: [`docs/examples/harness-doctor-report.md`](docs/examples/harness-doctor-report.md)
 
-For an objective baseline scan:
+For an objective baseline scan, use `python3` instead of `python` on
+macOS/Linux when `python` is unavailable:
 
 ```powershell
 python scripts/harness_doctor.py --target .
@@ -191,7 +192,8 @@ human rework.
 ## Local Checks
 
 Run these checks before changing starter-kit templates, command workflows,
-installer behavior, or drift scripts:
+installer behavior, or drift scripts. Use `python3` instead of `python` on
+macOS/Linux when `python` is unavailable:
 
 ```powershell
 python -m unittest discover -s tests

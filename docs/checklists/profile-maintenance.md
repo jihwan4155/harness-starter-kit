@@ -38,6 +38,8 @@ Use this checklist when adding or changing files under `templates/profiles/`.
 
 ## 5. Validate
 
+On macOS/Linux, use `python3` instead of `python` when `python` is unavailable.
+
 ```powershell
 python -m unittest tests.test_profile_consistency
 python -m unittest discover -s tests
