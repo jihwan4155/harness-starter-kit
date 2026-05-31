@@ -92,6 +92,13 @@ For the full prompt and workflow details, see
 [`docs/prompts/apply-to-target-repo.md`](docs/prompts/apply-to-target-repo.md)
 and [`docs/adoption-workflow.md`](docs/adoption-workflow.md).
 
+<p align="center">
+<img width="939" height="783" alt="제목 없는 디자인" src="https://github.com/user-attachments/assets/a09c060c-3ac1-4ca4-bbce-8220478da130" />
+
+If this kit helps you, a GitHub star would be appreciated.
+</p>
+
+
 ## Harness Theory
 
 Harness engineering treats the repository as the durable operating environment
