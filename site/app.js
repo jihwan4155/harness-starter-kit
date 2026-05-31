@@ -23,7 +23,7 @@
       applyLang(next);
     });
   }
-  applyLang("ko");
+  applyLang("en");
 
   /* ---------- copy prompt ---------- */
   const copyBtn = document.getElementById("copy-btn");

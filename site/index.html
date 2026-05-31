@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Harness Starter Kit — 프롬프트를 저장소의 기억으로</title>
+    <title>Harness Starter Kit - Turn prompts into repository memory</title>
     <meta
       name="description"
-      content="코딩 에이전트가 일회성 프롬프트가 아니라 지속되는 프로젝트 컨텍스트 안에서 안정적으로 일하도록 만드는 prompt-first 하네스 엔지니어링 키트."
+      content="A prompt-first harness engineering kit that helps coding agents work from durable project context instead of one-off prompts."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,13 +16,13 @@
     />
     <link rel="stylesheet" href="styles.css?v=2" />
   </head>
-  <body data-lang="ko">
+  <body data-lang="en">
     <!-- Scroll progress bar -->
     <div class="scroll-progress" aria-hidden="true"><span id="scroll-bar"></span></div>
 
     <!-- Minimal floating controls (no top bar) -->
     <div class="floating-controls">
-      <button id="lang-toggle" class="lang-toggle" type="button" aria-label="언어 전환">
+      <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch language">
         <span class="lang-on">KO</span><span class="lang-off">EN</span>
       </button>
       <a class="ghost-btn" href="https://github.com/baskduf/harness-starter-kit" target="_blank" rel="noopener">
@@ -51,7 +51,7 @@
           <p class="hero-sub i18n"
             data-ko="채팅에서 매번 반복하던 지시를, 저장소에 남는 규칙과 검사, 기억으로 바꿉니다. 코딩 에이전트가 세션마다 맨바닥에서 추측하지 않도록."
             data-en="Turn repeated chat instructions into durable rules, checks, and memory in your repo — so coding agents stop guessing from scratch every session.">
-            채팅에서 매번 반복하던 지시를, 저장소에 남는 규칙과 검사, 기억으로 바꿉니다. 코딩 에이전트가 세션마다 맨바닥에서 추측하지 않도록.
+            Turn repeated chat instructions into durable rules, checks, and memory in your repo - so coding agents stop guessing from scratch every session.
           </p>
         </div>
         <a href="#theory" class="scroll-cue" aria-hidden="true"><span></span></a>
@@ -64,12 +64,12 @@
           <h2 class="big reveal i18n"
             data-ko="에이전트가 일할 저장소를 설계합니다."
             data-en="Design the repository for the agent.">
-            에이전트가 일할 저장소를 설계합니다.
+            Design the repository for the agent.
           </h2>
           <p class="lead reveal i18n"
             data-ko="하네스 엔지니어링은 코딩 에이전트가 일회성 프롬프트에 의존하지 않고 저장소에 쌓인 맥락 안에서 일하도록, 저장소의 구조를 다듬는 일입니다. 기준은 언제나 대상 저장소 자신이며, 하네스는 그 저장소의 실제 구조와 명령, 위험, 리뷰 방식을 반영할 때에만 쓸모가 있습니다."
             data-en="Harness engineering shapes a repository so coding agents work inside durable project context instead of one-off chat prompts. The target repo is always the source of truth — a harness is useful only when it reflects the real architecture, commands, risks, and review habits.">
-            하네스 엔지니어링은 코딩 에이전트가 일회성 프롬프트에 의존하지 않고 저장소에 쌓인 맥락 안에서 일하도록, 저장소의 구조를 다듬는 일입니다.
+            Harness engineering shapes a repository so coding agents work inside durable project context instead of one-off chat prompts. The target repo is always the source of truth - a harness is useful only when it reflects the real architecture, commands, risks, and review habits.
           </p>
 
           <div class="equation reveal" aria-label="Harness working model">
@@ -86,7 +86,7 @@
       <section id="pillars" class="pillars">
         <div class="wrap">
           <p class="section-eyebrow rye reveal">THE WORKING MODEL · 6 PARTS</p>
-          <h2 class="mid reveal i18n" data-ko="하네스를 이루는 여섯 가지 요소" data-en="Six parts of a harness">하네스를 이루는 여섯 가지 요소</h2>
+          <h2 class="mid reveal i18n" data-ko="하네스를 이루는 여섯 가지 요소" data-en="Six parts of a harness">Six parts of a harness</h2>
 
           <div class="card-grid">
             <article class="p-card reveal">
@@ -94,7 +94,7 @@
               <h3>Instructions</h3>
               <p class="p-purpose i18n"
                 data-ko="이 프로젝트가 무엇인지, 어떻게 일해야 하는지, 무엇을 피해야 하는지 알려줍니다."
-                data-en="Tell agents what the project is, how to work, and what to avoid.">이 프로젝트가 무엇인지, 어떻게 일해야 하는지, 무엇을 피해야 하는지 알려줍니다.</p>
+                data-en="Tell agents what the project is, how to work, and what to avoid.">Tell agents what the project is, how to work, and what to avoid.</p>
               <div class="p-artifacts"><span>AGENTS.md</span><span>CLAUDE.md</span><span>contribution docs</span></div>
             </article>
 
@@ -103,7 +103,7 @@
               <h3>Constraints</h3>
               <p class="p-purpose i18n"
                 data-ko="중요한 규칙은 가능한 곳에서 도구로 강제되게 만듭니다."
-                data-en="Make important rules enforceable where practical.">중요한 규칙은 가능한 곳에서 도구로 강제되게 만듭니다.</p>
+                data-en="Make important rules enforceable where practical.">Make important rules enforceable where practical.</p>
               <div class="p-artifacts"><span>lint</span><span>type checks</span><span>import rules</span><span>CI gates</span></div>
             </article>
 
@@ -112,7 +112,7 @@
               <h3>Feedback</h3>
               <p class="p-purpose i18n"
                 data-ko="변경하자마자 빠르고 구체적인 신호를 돌려줍니다."
-                data-en="Give fast, concrete signals after a change.">변경하자마자 빠르고 구체적인 신호를 돌려줍니다.</p>
+                data-en="Give fast, concrete signals after a change.">Give fast, concrete signals after a change.</p>
               <div class="p-artifacts"><span>tests</span><span>check_*.py</span><span>CI</span></div>
             </article>
 
@@ -121,7 +121,7 @@
               <h3>Memory</h3>
               <p class="p-purpose i18n"
                 data-ko="결정과 실패, 관례, 도메인 맥락을 세션이 끝나도 남깁니다."
-                data-en="Preserve decisions, failures, conventions, and domain context across sessions.">결정과 실패, 관례, 도메인 맥락을 세션이 끝나도 남깁니다.</p>
+                data-en="Preserve decisions, failures, conventions, and domain context across sessions.">Preserve decisions, failures, conventions, and domain context across sessions.</p>
               <div class="p-artifacts"><span>docs/decisions</span><span>docs/failures</span><span>docs/conventions</span></div>
             </article>
 
@@ -130,7 +130,7 @@
               <h3>Evaluation</h3>
               <p class="p-purpose i18n"
                 data-ko="하네스의 준비도와 에이전트의 실제 성과를 측정합니다."
-                data-en="Measure how ready the harness is and how agents actually perform.">하네스의 준비도와 에이전트의 실제 성과를 측정합니다.</p>
+                data-en="Measure how ready the harness is and how agents actually perform.">Measure how ready the harness is and how agents actually perform.</p>
               <div class="p-artifacts"><span>Harness Doctor</span><span>effectiveness reports</span><span>task outcomes</span></div>
             </article>
 
@@ -139,7 +139,7 @@
               <h3>Governance</h3>
               <p class="p-purpose i18n"
                 data-ko="하네스가 제멋대로 덮어쓰는 시스템이 되지 않도록 유지·관리합니다."
-                data-en="Keep the harness maintained without making it an automatic rewrite system.">하네스가 제멋대로 덮어쓰는 시스템이 되지 않도록 유지·관리합니다.</p>
+                data-en="Keep the harness maintained without making it an automatic rewrite system.">Keep the harness maintained without making it an automatic rewrite system.</p>
               <div class="p-artifacts"><span>/harness update</span><span>/harness refresh</span><span>source.json</span></div>
             </article>
           </div>
@@ -150,46 +150,46 @@
       <section id="decide" class="decide">
         <div class="wrap">
           <p class="section-eyebrow rye reveal">USE IT AS A DECISION TABLE</p>
-          <h2 class="mid reveal i18n" data-ko="빈틈이 보이면, 딱 하나만 더한다" data-en="When a gap appears, add just one more thing">빈틈이 보이면, 딱 하나만 더한다</h2>
+          <h2 class="mid reveal i18n" data-ko="빈틈이 보이면, 딱 하나만 더한다" data-en="When a gap appears, add just one more thing">When a gap appears, add just one more thing</h2>
           <p class="lead narrow reveal i18n"
             data-ko="여러 항목이 동시에 해당한다면, 설명을 늘리기보다 강제할 수 있는 제약과 피드백을 먼저 택하세요. 지시는 최소한으로 유지합니다."
-            data-en="When several rows apply, prefer enforceable constraints and feedback over more written rules. Keep instructions minimal.">여러 항목이 동시에 해당한다면, 설명을 늘리기보다 강제할 수 있는 제약과 피드백을 먼저 택하세요.</p>
+            data-en="When several rows apply, prefer enforceable constraints and feedback over more written rules. Keep instructions minimal.">When several rows apply, prefer enforceable constraints and feedback over more written rules. Keep instructions minimal.</p>
 
           <div class="d-table reveal">
             <div class="d-row d-head">
-              <span class="i18n" data-ko="상황" data-en="Situation">상황</span>
-              <span class="i18n" data-ko="추가할 것" data-en="Add / update">추가할 것</span>
-              <span class="i18n" data-ko="점검 질문" data-en="Review question">점검 질문</span>
+              <span class="i18n" data-ko="상황" data-en="Situation">Situation</span>
+              <span class="i18n" data-ko="추가할 것" data-en="Add / update">Add / update</span>
+              <span class="i18n" data-ko="점검 질문" data-en="Review question">Review question</span>
             </div>
             <div class="d-row">
-              <span class="i18n" data-ko="에이전트가 프로젝트 구조와 명령, 금지 사항을 모른다" data-en="Agent doesn't know the project shape, commands, or forbidden actions">에이전트가 프로젝트 구조와 명령, 금지 사항을 모른다</span>
+              <span class="i18n" data-ko="에이전트가 프로젝트 구조와 명령, 금지 사항을 모른다" data-en="Agent doesn't know the project shape, commands, or forbidden actions">Agent doesn't know the project shape, commands, or forbidden actions</span>
               <span class="d-tag">Instructions</span>
-              <span class="i18n" data-ko="짧고 오래가며, 이 저장소에 꼭 맞는가?" data-en="Is it short, durable, and specific to this repo?">짧고 오래가며, 이 저장소에 꼭 맞는가?</span>
+              <span class="i18n" data-ko="짧고 오래가며, 이 저장소에 꼭 맞는가?" data-en="Is it short, durable, and specific to this repo?">Is it short, durable, and specific to this repo?</span>
             </div>
             <div class="d-row">
-              <span class="i18n" data-ko="도구로 잡아낼 수 있는 규칙을 어길 여지가 있다" data-en="Agents can break a rule that tooling could catch">도구로 잡아낼 수 있는 규칙을 어길 여지가 있다</span>
+              <span class="i18n" data-ko="도구로 잡아낼 수 있는 규칙을 어길 여지가 있다" data-en="Agents can break a rule that tooling could catch">Agents can break a rule that tooling could catch</span>
               <span class="d-tag">Constraints</span>
-              <span class="i18n" data-ko="lint·타입·import·drift·CI로 막을 수 있는가?" data-en="Can lint, types, imports, drift, or CI enforce it?">lint·타입·import·drift·CI로 막을 수 있는가?</span>
+              <span class="i18n" data-ko="lint·타입·import·drift·CI로 막을 수 있는가?" data-en="Can lint, types, imports, drift, or CI enforce it?">Can lint, types, imports, drift, or CI enforce it?</span>
             </div>
             <div class="d-row">
-              <span class="i18n" data-ko="변경 후 빠른 통과/실패 신호가 필요하다" data-en="A fast pass/fail signal is needed after a change">변경 후 빠른 통과/실패 신호가 필요하다</span>
+              <span class="i18n" data-ko="변경 후 빠른 통과/실패 신호가 필요하다" data-en="A fast pass/fail signal is needed after a change">A fast pass/fail signal is needed after a change</span>
               <span class="d-tag">Feedback</span>
-              <span class="i18n" data-ko="실패 원인이 분명한 로컬·CI 검사가 있는가?" data-en="Is there a local or CI check with clear failure output?">실패 원인이 분명한 로컬·CI 검사가 있는가?</span>
+              <span class="i18n" data-ko="실패 원인이 분명한 로컬·CI 검사가 있는가?" data-en="Is there a local or CI check with clear failure output?">Is there a local or CI check with clear failure output?</span>
             </div>
             <div class="d-row">
-              <span class="i18n" data-ko="같은 결정·관례·도메인 용어·실패가 자꾸 되풀이된다" data-en="The same decision, convention, term, or failure keeps reappearing">같은 결정·관례·도메인 용어·실패가 자꾸 되풀이된다</span>
+              <span class="i18n" data-ko="같은 결정·관례·도메인 용어·실패가 자꾸 되풀이된다" data-en="The same decision, convention, term, or failure keeps reappearing">The same decision, convention, term, or failure keeps reappearing</span>
               <span class="d-tag">Memory</span>
-              <span class="i18n" data-ko="결정·실패·관례·도메인 기록으로 남길 만한가?" data-en="Should it become a decision, failure, convention, or domain record?">결정·실패·관례·도메인 기록으로 남길 만한가?</span>
+              <span class="i18n" data-ko="결정·실패·관례·도메인 기록으로 남길 만한가?" data-en="Should it become a decision, failure, convention, or domain record?">Should it become a decision, failure, convention, or domain record?</span>
             </div>
             <div class="d-row">
-              <span class="i18n" data-ko="에이전트 작업이 정말 나아졌다는 증거가 필요하다" data-en="You want evidence that agent work improved">에이전트 작업이 정말 나아졌다는 증거가 필요하다</span>
+              <span class="i18n" data-ko="에이전트 작업이 정말 나아졌다는 증거가 필요하다" data-en="You want evidence that agent work improved">You want evidence that agent work improved</span>
               <span class="d-tag">Evaluation</span>
-              <span class="i18n" data-ko="건강 점수 말고, 비교할 수 있는 작업 결과가 있는가?" data-en="Is there a comparable task outcome, not just a health score?">건강 점수 말고, 비교할 수 있는 작업 결과가 있는가?</span>
+              <span class="i18n" data-ko="건강 점수 말고, 비교할 수 있는 작업 결과가 있는가?" data-en="Is there a comparable task outcome, not just a health score?">Is there a comparable task outcome, not just a health score?</span>
             </div>
             <div class="d-row">
-              <span class="i18n" data-ko="가이드가 낡았거나 중복되거나 출처가 바뀌었다" data-en="Guidance is stale, duplicated, untrusted, or source changed">가이드가 낡았거나 중복되거나 출처가 바뀌었다</span>
+              <span class="i18n" data-ko="가이드가 낡았거나 중복되거나 출처가 바뀌었다" data-en="Guidance is stale, duplicated, untrusted, or source changed">Guidance is stale, duplicated, untrusted, or source changed</span>
               <span class="d-tag">Governance</span>
-              <span class="i18n" data-ko="/harness refresh·update·수동 검토 중 어느 쪽인가?" data-en="Is this /harness refresh, /harness update, or manual review?">/harness refresh·update·수동 검토 중 어느 쪽인가?</span>
+              <span class="i18n" data-ko="/harness refresh·update·수동 검토 중 어느 쪽인가?" data-en="Is this /harness refresh, /harness update, or manual review?">Is this /harness refresh, /harness update, or manual review?</span>
             </div>
           </div>
         </div>
@@ -199,13 +199,13 @@
       <section id="loop" class="loop">
         <div class="wrap">
           <p class="section-eyebrow rye reveal">THE IMPROVEMENT LOOP</p>
-          <h2 class="mid reveal i18n" data-ko="가볍게 도는 다섯 단계" data-en="Five lightweight steps">가볍게 도는 다섯 단계</h2>
+          <h2 class="mid reveal i18n" data-ko="가볍게 도는 다섯 단계" data-en="Five lightweight steps">Five lightweight steps</h2>
           <ol class="loop-list">
-            <li class="reveal"><span class="l-no">1</span><div><strong class="i18n" data-ko="작업 파악" data-en="Map the work">작업 파악</strong><p class="i18n" data-ko="작업 유형, 손댈 파일 범위, 로컬 명령, 예상되는 실패 지점을 정리합니다." data-en="Identify the task type, expected file boundary, local commands, and likely failure modes.">작업 유형, 손댈 파일 범위, 로컬 명령, 예상되는 실패 지점을 정리합니다.</p></div></li>
-            <li class="reveal"><span class="l-no">2</span><div><strong class="i18n" data-ko="하네스 보강" data-en="Add or refine">하네스 보강</strong><p class="i18n" data-ko="지시·제약·피드백·기억·평가·거버넌스를 더하거나 다듬습니다." data-en="Add or refine instructions, constraints, feedback, memory, evaluation, or governance.">지시·제약·피드백·기억·평가·거버넌스를 더하거나 다듬습니다.</p></div></li>
-            <li class="reveal"><span class="l-no">3</span><div><strong class="i18n" data-ko="건강 측정" data-en="Measure health">건강 측정</strong><p class="i18n" data-ko="로컬 검사를 돌리고, 필요하면 Harness Doctor로 점검합니다." data-en="Run local checks and, when useful, Harness Doctor.">로컬 검사를 돌리고, 필요하면 Harness Doctor로 점검합니다.</p></div></li>
-            <li class="reveal"><span class="l-no">4</span><div><strong class="i18n" data-ko="결과 기록" data-en="Record outcomes">결과 기록</strong><p class="i18n" data-ko="잘못 건드린 파일, 반복된 실수, 검증 결과, drift 탐지, 재작업을 기록합니다." data-en="Capture wrong-file edits, repeated mistakes, verification results, drift detections, and rework.">잘못 건드린 파일, 반복된 실수, 검증 결과, drift 탐지, 재작업을 기록합니다.</p></div></li>
-            <li class="reveal"><span class="l-no">5</span><div><strong class="i18n" data-ko="다음 변경 관리" data-en="Manage the next change">다음 변경 관리</strong><p class="i18n" data-ko="근거가 뒷받침되는 곳에서만 규칙과 검사, 기록을 갱신합니다." data-en="Update rules, checks, and records only where the evidence justifies it.">근거가 뒷받침되는 곳에서만 규칙과 검사, 기록을 갱신합니다.</p></div></li>
+            <li class="reveal"><span class="l-no">1</span><div><strong class="i18n" data-ko="작업 파악" data-en="Map the work">Map the work</strong><p class="i18n" data-ko="작업 유형, 손댈 파일 범위, 로컬 명령, 예상되는 실패 지점을 정리합니다." data-en="Identify the task type, expected file boundary, local commands, and likely failure modes.">Identify the task type, expected file boundary, local commands, and likely failure modes.</p></div></li>
+            <li class="reveal"><span class="l-no">2</span><div><strong class="i18n" data-ko="하네스 보강" data-en="Add or refine">Add or refine</strong><p class="i18n" data-ko="지시·제약·피드백·기억·평가·거버넌스를 더하거나 다듬습니다." data-en="Add or refine instructions, constraints, feedback, memory, evaluation, or governance.">Add or refine instructions, constraints, feedback, memory, evaluation, or governance.</p></div></li>
+            <li class="reveal"><span class="l-no">3</span><div><strong class="i18n" data-ko="건강 측정" data-en="Measure health">Measure health</strong><p class="i18n" data-ko="로컬 검사를 돌리고, 필요하면 Harness Doctor로 점검합니다." data-en="Run local checks and, when useful, Harness Doctor.">Run local checks and, when useful, Harness Doctor.</p></div></li>
+            <li class="reveal"><span class="l-no">4</span><div><strong class="i18n" data-ko="결과 기록" data-en="Record outcomes">Record outcomes</strong><p class="i18n" data-ko="잘못 건드린 파일, 반복된 실수, 검증 결과, drift 탐지, 재작업을 기록합니다." data-en="Capture wrong-file edits, repeated mistakes, verification results, drift detections, and rework.">Capture wrong-file edits, repeated mistakes, verification results, drift detections, and rework.</p></div></li>
+            <li class="reveal"><span class="l-no">5</span><div><strong class="i18n" data-ko="다음 변경 관리" data-en="Manage the next change">Manage the next change</strong><p class="i18n" data-ko="근거가 뒷받침되는 곳에서만 규칙과 검사, 기록을 갱신합니다." data-en="Update rules, checks, and records only where the evidence justifies it.">Update rules, checks, and records only where the evidence justifies it.</p></div></li>
           </ol>
         </div>
       </section>
@@ -214,18 +214,18 @@
       <section id="how" class="how">
         <div class="wrap">
           <p class="section-eyebrow rye reveal">HOW TO USE</p>
-          <h2 class="big reveal i18n" data-ko="대상 저장소를 열고, 붙여넣으세요." data-en="Open your repo, then paste.">대상 저장소를 열고, 붙여넣으세요.</h2>
+          <h2 class="big reveal i18n" data-ko="대상 저장소를 열고, 붙여넣으세요." data-en="Open your repo, then paste.">Open your repo, then paste.</h2>
           <p class="lead reveal i18n"
             data-ko="대상 저장소를 코딩 에이전트로 열고, 아래 프롬프트를 그대로 붙여넣으세요. 에이전트가 키트를 clone해서 읽고, 저장소를 먼저 살핀 다음 꼭 필요한 최소한의 하네스만 적용합니다."
-            data-en="Open the target repository with a coding agent and pass the prompt below as-is. The agent clones and reads the kit, inspects your repo first, then applies only the smallest useful harness.">대상 저장소를 코딩 에이전트로 열고, 아래 프롬프트를 그대로 붙여넣으세요.</p>
+            data-en="Open the target repository with a coding agent and pass the prompt below as-is. The agent clones and reads the kit, inspects your repo first, then applies only the smallest useful harness.">Open the target repository with a coding agent and pass the prompt below as-is. The agent clones and reads the kit, inspects your repo first, then applies only the smallest useful harness.</p>
 
           <div class="prompt-card reveal">
             <div class="prompt-head">
               <span class="prompt-dot" aria-hidden="true"></span>
-              <span class="prompt-title i18n" data-ko="적용 프롬프트" data-en="Adoption prompt">적용 프롬프트</span>
+              <span class="prompt-title i18n" data-ko="적용 프롬프트" data-en="Adoption prompt">Adoption prompt</span>
               <button id="copy-btn" class="copy-btn" type="button">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8.5A2.5 2.5 0 0 1 10.5 6H17a2.5 2.5 0 0 1 2.5 2.5V15a2.5 2.5 0 0 1-2.5 2.5h-6.5A2.5 2.5 0 0 1 8 15V8.5Z"/><path d="M5.5 13.5V7A2.5 2.5 0 0 1 8 4.5h6.5"/></svg>
-                <span class="copy-label i18n" data-ko="복사" data-en="Copy">복사</span>
+                <span class="copy-label i18n" data-ko="복사" data-en="Copy">Copy</span>
               </button>
             </div>
             <pre id="prompt-text"><code>Use this kit to apply harness engineering to this repository:
