@@ -2,6 +2,7 @@
 
 ## Reviewed Changes
 
+- Invocation: TODO: /harness review | /harness review sub-agent
 - Branch/status: TODO
 - Changed files reviewed: TODO
 - Review scope: TODO: current diff, staged diff, PR diff, or described change

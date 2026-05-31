@@ -13,13 +13,38 @@ source of truth, avoids unnecessary automation, keeps templates conservative,
 adds enforceable checks only where practical, updates durable memory when
 needed, and runs the right validation before completion.
 
-At the start of every review, check whether the current environment exposes a
-multi-agent or subagent review tool. If one is available and permitted by the
-active runtime and tool instructions, invoke a read-only reviewer subagent
-before writing the final review. If no such tool is available, the tool is
-present but not permitted, the tool is blocked, or the subagent call fails,
-continue with a single-agent reviewer perspective and state the fallback reason
-in the report. Do not depend on any specific agent runtime.
+Every review must check whether the current environment exposes a multi-agent
+or subagent review tool, record the reviewer mode, and report any fallback
+reason. Do not depend on any specific agent runtime.
+
+## Invocation Modes
+
+### `/harness review`
+
+Run the normal diagnostic review. At the start, check whether multi-agent or
+subagent tools are available in the current environment. If a subagent tool is
+available and permitted by the active runtime and tool instructions for this
+invocation, invoke a read-only reviewer subagent before writing the final
+review.
+
+If the active tool instructions require an explicit user request to spawn a
+subagent and the user only asked for `/harness review`, treat the tool as
+present but not permitted, continue with a single-agent reviewer perspective,
+and report the fallback reason.
+
+### `/harness review sub-agent`
+
+Run the same diagnostic review, but treat this invocation as the user's
+explicit request to use a read-only reviewer subagent. If a multi-agent or
+subagent tool is available and permitted by the active runtime and tool
+instructions, invoke it before writing the final review.
+
+This mode is still diagnostic only. It is not permission to modify files, add
+runtime-specific subagent integration, or ignore higher-priority tool
+instructions. If no such tool is available, the tool is blocked, the active
+runtime still does not permit the call, or the subagent call fails, continue
+with a single-agent reviewer perspective and state the fallback reason in the
+report.
 
 ## Scope
 
@@ -39,8 +64,14 @@ automation.
 ## Procedure
 
 1. Treat the current working directory as the target repository root.
-2. Check whether multi-agent or subagent tools are available in the current
-   environment.
+2. Determine whether the user invoked `/harness review` or
+   `/harness review sub-agent`, then check whether multi-agent or subagent
+   tools are available in the current environment.
+   - For `/harness review`, use a subagent only when the tool is available and
+     permitted by the active runtime and tool instructions for this invocation.
+   - For `/harness review sub-agent`, treat the invocation as explicit user
+     permission to use a read-only reviewer subagent, while still obeying the
+     active runtime and tool instructions.
    - If a subagent tool is available and permitted by the active runtime and
      tool instructions, call a read-only reviewer subagent before producing the
      final report.
@@ -109,6 +140,7 @@ automation.
 Harness Review Report
 
 Reviewed Changes:
+- Invocation: <command used: /harness review or /harness review sub-agent>
 - Branch/status: <summary>
 - Changed files reviewed: <files>
 - Review scope: <current diff, staged diff, PR diff, or described change>
@@ -150,6 +182,9 @@ Recommended Follow-Up:
   constraints, or broader installer automation as part of the review.
 - Do not silently skip the multi-agent or subagent availability check. If the
   review falls back to a single-agent perspective, report why.
+- Treat `/harness review sub-agent` only as explicit permission to request a
+  read-only reviewer subagent. It is not approval to modify files or add
+  runtime-specific subagent integration.
 - Do not treat a clean review as proof of agent effectiveness. It is a
   change-set diagnostic, not an outcome measurement.
 - If you recommend a stronger check or policy, present it as follow-up or a

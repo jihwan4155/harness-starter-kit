@@ -62,6 +62,11 @@ Requirements:
   docs, rules, knowledge records, and checks for stale or duplicated guidance.
   Do not delete, archive, move, or rename files without my explicit approval for
   the specific files.
+- If I ask for /harness review sub-agent, use
+  ./harness-starter-kit/commands/harness-review.md and treat the request as
+  explicit permission to use a read-only reviewer subagent when available and
+  permitted by the active runtime and tool instructions. If unavailable,
+  blocked, not permitted, or failed, report the fallback reason.
 - If I ask for /harness review, use
   ./harness-starter-kit/commands/harness-review.md to review the current change
   set from an opposing harness-engineering perspective. Report findings,
@@ -135,6 +140,10 @@ Harness Review는 기본적으로 diagnostic입니다. target source-of-truth �
 불필요한 automation, 약한 validation, 누락된 durable memory, overreach, stale
 또는 duplicated guidance를 찾습니다. 사용자가 review 후 fix 적용을 명시적으로
 요청하기 전에는 파일을 수정하면 안 됩니다.
+
+`/harness review sub-agent`는 read-only reviewer subagent 사용을 명시적으로
+요청할 때 사용합니다. active runtime이 호출할 수 없으면 single-agent review로
+fallback하고 그 이유를 보고해야 합니다.
 
 - 명령 workflow: [`commands/harness-review.md`](commands/harness-review.md)
 - Report template: [`docs/templates/harness-review-report.md`](docs/templates/harness-review-report.md)

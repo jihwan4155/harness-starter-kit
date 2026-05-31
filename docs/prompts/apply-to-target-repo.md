@@ -27,6 +27,12 @@ docs, rules, knowledge records, and checks for stale or duplicated guidance.
 Do not delete, archive, move, or rename files without my explicit approval for
 the specific files.
 
+If I ask for /harness review sub-agent, use
+./harness-starter-kit/commands/harness-review.md and treat the request as
+explicit permission to use a read-only reviewer subagent when available and
+permitted by the active runtime and tool instructions. If unavailable, blocked,
+not permitted, or failed, report the fallback reason.
+
 If I ask for /harness review, use
 ./harness-starter-kit/commands/harness-review.md to review the current change
 set from an opposing harness-engineering perspective. Report findings, missing

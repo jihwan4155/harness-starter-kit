@@ -1,12 +1,13 @@
 # Harness Review Example Report
 
-This example shows the expected report shape for `/harness review`. It is
-diagnostic and does not apply fixes.
+This example shows the expected report shape for `/harness review` and
+`/harness review sub-agent`. It is diagnostic and does not apply fixes.
 
 ```text
 Harness Review Report
 
 Reviewed Changes:
+- Invocation: /harness review sub-agent
 - Branch/status: feature/add-harness-docs with unstaged documentation changes
 - Changed files reviewed: AGENTS.md, docs/adoption-workflow.md,
   scripts/check_structure.py, templates/generic/AGENTS.md
@@ -59,6 +60,7 @@ Recommended Follow-Up:
 Harness Review Report
 
 Reviewed Changes:
+- Invocation: /harness review
 - Branch/status: docs/harness-review-fallback with unstaged command-doc changes
 - Changed files reviewed: commands/harness-review.md,
   docs/templates/harness-review-report.md

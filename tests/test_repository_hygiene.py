@@ -281,6 +281,10 @@ class RepositoryHygieneTests(unittest.TestCase):
             "durable memory",
             "validation",
             "checks",
+            "Invocation Modes",
+            "/harness review sub-agent",
+            "explicit user permission",
+            "explicit request",
             "multi-agent or subagent tools are available",
             "available and permitted by the active runtime and tool instructions",
             "read-only reviewer subagent",
@@ -309,13 +313,45 @@ class RepositoryHygieneTests(unittest.TestCase):
 
         for text in (root_agents, readme, component_map, adoption_prompt):
             self.assertIn("/harness review", text)
+            self.assertIn("/harness review sub-agent", text)
             self.assertIn("commands/harness-review.md", text)
+
+        for name, text, specific_route, generic_route in (
+            (
+                "AGENTS.md",
+                root_agents,
+                "`/harness review sub-agent`",
+                "`/harness review`:",
+            ),
+            (
+                "README.md",
+                readme,
+                "If I ask for /harness review sub-agent",
+                "If I ask for /harness review, use",
+            ),
+            (
+                "docs/prompts/apply-to-target-repo.md",
+                adoption_prompt,
+                "If I ask for /harness review sub-agent",
+                "If I ask for /harness review, use",
+            ),
+        ):
+            with self.subTest(route_order=name):
+                self.assertLess(
+                    text.index(specific_route),
+                    text.index(generic_route),
+                )
 
         for filename in ("README.ko.md", "README.ja.md", "README.zh-CN.md"):
             with self.subTest(readme=filename):
                 localized = (REPO_ROOT / filename).read_text(encoding="utf-8")
                 self.assertIn("### `/harness review`", localized)
+                self.assertIn("/harness review sub-agent", localized)
                 self.assertIn("commands/harness-review.md", localized)
+                self.assertLess(
+                    localized.index("If I ask for /harness review sub-agent"),
+                    localized.index("If I ask for /harness review, use"),
+                )
 
         template_text = review_template.read_text(encoding="utf-8")
         for section in (
@@ -330,9 +366,12 @@ class RepositoryHygieneTests(unittest.TestCase):
             self.assertIn(section, template_text)
         self.assertIn("Reviewer mode: TODO: subagent used | single-agent fallback", template_text)
         self.assertIn("Fallback reason: TODO: reason or none", template_text)
+        self.assertIn("Invocation: TODO: /harness review | /harness review sub-agent", template_text)
         self.assertIn("does not apply fixes", template_text)
 
         example_text = review_example.read_text(encoding="utf-8")
+        self.assertIn("Invocation: /harness review sub-agent", example_text)
+        self.assertIn("Invocation: /harness review", example_text)
         self.assertIn("Reviewer mode: subagent used", example_text)
         self.assertIn("Fallback reason: none", example_text)
         self.assertIn("Reviewer mode: single-agent fallback", example_text)

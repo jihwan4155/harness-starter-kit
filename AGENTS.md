@@ -43,6 +43,11 @@ conventions.
 - `/harness refresh`: use `commands/harness-refresh.md`. Review stale or
   duplicated target harness guidance. Do not delete, archive, move, or rename
   files without explicit approval for the specific files.
+- `/harness review sub-agent`: use `commands/harness-review.md` in sub-agent
+  invocation mode. Treat the request as explicit permission to use a read-only
+  reviewer subagent when available and permitted by the active runtime and tool
+  instructions; if unavailable, blocked, not permitted, or failed, fall back to
+  single-agent review and report the reason.
 - `/harness review`: use `commands/harness-review.md`. Review the current
   change set from an opposing harness-engineering perspective. It is diagnostic
   by default and must not modify files unless the user explicitly asks to apply

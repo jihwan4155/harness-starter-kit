@@ -60,7 +60,9 @@ class ReadmePromptDriftTests(unittest.TestCase):
         self.assertGreaterEqual(len(expected_blocks), 1)
         expected = expected_blocks[0]
         self.assertIn("/harness review", expected)
+        self.assertIn("/harness review sub-agent", expected)
         self.assertIn("commands/harness-review.md", expected)
+        self.assertIn("explicit permission", expected)
 
         for filename in LOCALIZED_READMES:
             with self.subTest(readme=filename):
