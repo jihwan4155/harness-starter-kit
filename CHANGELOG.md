@@ -2,6 +2,33 @@
 
 Notable project changes should be recorded here before release tags are cut.
 
+## v0.1.4 - 2026-06-02
+
+Patch release for governance documentation and review diagnostics. This release
+keeps `/harness review` diagnostic-only while tightening the durable-memory
+review path and clarifying command usage.
+
+### Added
+
+- Failure memory for missed ADR review when structural product decisions are
+  implemented without decision-record consideration.
+- A `/harness review` diagnostic warning for product or workflow structure,
+  mock external-behavior boundaries, major data models, state classifications,
+  or product UX principles that become code structure without a
+  `docs/decisions/` update or explicit justification.
+- iOS as a roadmap candidate profile paired with the existing Android profile,
+  with Xcode, simulator, signing, and device checks documented as macOS/manual
+  unless a target repository already has macOS CI.
+
+### Changed
+
+- Clarify that `/harness ...` names are prompt conventions by default, not
+  built-in editor commands.
+- Refine `/harness review sub-agent` ownership guidance so reviewer mode and
+  fallback reason stay parent/orchestrator-owned.
+- Update localized README command guidance to match the English prompt
+  convention wording.
+
 ## v0.1.3 - 2026-05-31
 
 Patch release for `/harness review` reviewer-mode routing. This release keeps
