@@ -548,6 +548,8 @@ class RepositoryHygieneTests(unittest.TestCase):
 
         external_api_report_fields = (
             "## External API Verification",
+            "Required",
+            "Boundary",
             "Live/mock mode",
             "Secret handling and redaction checked",
             "Empty or zero-result behavior",

@@ -36,6 +36,8 @@ All checks passed.
 ## External API Verification
 
 - Required: No. The sample app does not call an external API.
+- Boundary: Not applicable; no route handler, server-only caller, fixture, or
+  mock API boundary was introduced.
 - Live/mock mode: Not applicable.
 - Secret handling and redaction checked: Not applicable; no provider secrets or
   server-only API boundary were introduced.
