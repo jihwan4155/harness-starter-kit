@@ -2,6 +2,40 @@
 
 Notable project changes should be recorded here before release tags are cut.
 
+## v0.1.6 - 2026-06-02
+
+Patch release for practical verification guidance and decision-memory
+automation. This release keeps the kit prompt-first while adding a configurable
+warning gate for implementation diffs that may need ADR review.
+
+### Added
+
+- `scripts/check_decision_memory.py`, plus generic template wiring, to warn when
+  watched implementation paths change without a matching `docs/decisions/`
+  update.
+- `.harness/decision-memory-rules.json` in the kit and generic template so
+  repositories can tune watched implementation paths, decision paths, and
+  ignored paths.
+- GitHub Actions wiring for decision-memory review checks, using the pull
+  request base SHA in PRs and a local smoke check for non-PR runs.
+- Practical checklists for external API work, decision/failure memory
+  boundaries, and verification script patterns.
+- Regression coverage for the decision-memory warning script, installer output,
+  generic template wiring, CI wiring, and profile guidance.
+
+### Changed
+
+- Expand adoption workflow and adoption report guidance for external API
+  verification, redaction, live/mock mode, empty-result behavior, provider
+  errors, and focused smoke checks.
+- Clarify `/harness update` handling for dirty target worktrees by separating
+  source tracking from target file mutation.
+- Strengthen `/harness review`, generic `AGENTS.md`, and UI profile guidance
+  around input semantics, state normalization, fallback policy, and displayed
+  decision criteria.
+- Make the Next.js profile's `check:harness` example more transparent with
+  named docs and structure subcommands, and add App Router verification notes.
+
 ## v0.1.5 - 2026-06-02
 
 Patch release for the decision-memory follow-up to `v0.1.4`. This release moves
