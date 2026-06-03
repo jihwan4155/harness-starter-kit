@@ -1,0 +1,70 @@
+schema_version: 1
+
+target:
+  repository: recipe-api harness practice target
+  repository_ref: local practice branch
+  stack_or_framework: Django REST Framework
+  date: 2026-06-03
+  agent_or_model: AI coding agent
+  reviewer: human maintainer
+
+task:
+  id: recipe-api-harness-adoption-cleanup
+  run_id: recipe-api-001
+  prompt_summary: Apply and refine a minimal Django harness adoption.
+  prompt_ref: local harness adoption and review prompts
+  prompt_hash: not recorded
+  comparable_task_group: django-harness-adoption
+  condition: harnessed-only
+  expected_boundary:
+    - AGENTS.md
+    - docs/**
+    - .harness/**
+    - scripts/**
+    - recipes/tests.py
+    - README.md
+  known_failure_mode: Generic scaffold drift and weak feedback loops after initial adoption.
+
+harness_context:
+  harness_doctor_score: recorded locally but not treated as effectiveness proof
+  harness_source:
+    kit_url: https://github.com/baskduf/harness-starter-kit
+    kit_commit: not recorded
+    source_tracking_ref: none
+  relevant_instructions:
+    - AGENTS.md
+    - docs/conventions/coding.md
+  relevant_constraints:
+    - python manage.py check
+    - python manage.py test
+    - python scripts/check_docs_drift.py
+    - python scripts/check_decision_memory.py --fail-on-warning
+  relevant_memory_records:
+    - docs/decisions/001-initial-api-design.md
+    - docs/failures/000-template.md
+
+outcome:
+  files_changed:
+    - AGENTS.md
+    - README.md
+    - docs/conventions/coding.md
+    - docs/decisions/001-initial-api-design.md
+    - docs/domain/glossary.md
+    - recipes/tests.py
+  wrong_file_edits: 0
+  repeated_known_mistake: false
+  verification_command: python manage.py check && python manage.py test && python scripts/check_docs_drift.py
+  first_pass_verification:
+    result: failed_then_passed_after_review
+  drift_violations_detected:
+    - README existed but was not useful project documentation.
+    - docs/domain/glossary.md used an API route string that docs-drift treated as a missing path.
+    - Django tests initially found zero tests.
+  human_rework_minutes: 35
+  reverted_files: []
+  notes: Review surfaced weak tests, generic scaffold text, and docs drift. The harness made those gaps explicit but did not prevent all first-pass issues.
+
+follow_up:
+  harness_change_needed: false
+  decision_or_failure_record: No failure record added; review findings were one-time adoption cleanup.
+  include_in_effectiveness_report: true
