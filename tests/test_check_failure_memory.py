@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 import tempfile
@@ -75,6 +76,12 @@ class CheckFailureMemoryTests(unittest.TestCase):
             "fixtures/tago-nodeid.json",
         ):
             self.touch_local_path(root, relative)
+
+    def write_package_json(self, root: Path, scripts: dict[str, str]) -> None:
+        (root / "package.json").write_text(
+            json.dumps({"scripts": scripts}),
+            encoding="utf-8",
+        )
 
     def test_no_failure_records_passes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -188,6 +195,11 @@ class CheckFailureMemoryTests(unittest.TestCase):
                 with tempfile.TemporaryDirectory() as tmp:
                     root = Path(tmp)
                     self.create_valid_reference_paths(root)
+                    if "npm run smoke:tago" in example:
+                        self.write_package_json(
+                            root,
+                            {"smoke:tago": "node scripts/smoke-tago.mjs"},
+                        )
                     self.write_record(
                         root,
                         VALID_RECORD.replace(
@@ -242,6 +254,11 @@ class CheckFailureMemoryTests(unittest.TestCase):
             with self.subTest(example=example):
                 with tempfile.TemporaryDirectory() as tmp:
                     root = Path(tmp)
+                    if "npm run test:planner" in example:
+                        self.write_package_json(
+                            root,
+                            {"test:planner": "node --test planner.test.mjs"},
+                        )
                     self.write_record(
                         root,
                         VALID_RECORD.replace(
@@ -255,6 +272,101 @@ class CheckFailureMemoryTests(unittest.TestCase):
 
                     self.assertEqual("", result.stdout)
                     self.assertEqual(0, result.returncode)
+
+    def test_package_manager_run_script_allows_terminal_punctuation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.write_package_json(
+                root,
+                {"test:planner": "node --test planner.test.mjs"},
+            )
+            self.write_record(
+                root,
+                VALID_RECORD.replace(
+                    "`tests/test_example.py` fails if the bug path returns.",
+                    "npm run test:planner.",
+                ),
+            )
+
+            result = self.run_checker(root)
+
+            self.assertEqual("", result.stdout)
+            self.assertEqual(0, result.returncode)
+
+    def test_package_manager_run_script_managers_use_root_scripts(self) -> None:
+        examples = (
+            "npm run test:planner",
+            "pnpm run test:planner",
+            "yarn run test:planner",
+            "bun run test:planner",
+        )
+        for example in examples:
+            with self.subTest(example=example):
+                with tempfile.TemporaryDirectory() as tmp:
+                    root = Path(tmp)
+                    self.write_package_json(
+                        root,
+                        {"test:planner": "node --test planner.test.mjs"},
+                    )
+                    self.write_record(
+                        root,
+                        VALID_RECORD.replace(
+                            "`tests/test_example.py` fails if the bug path returns.",
+                            example,
+                        ),
+                    )
+
+                    result = self.run_checker(root)
+
+                    self.assertEqual("", result.stdout)
+                    self.assertEqual(0, result.returncode)
+
+    def test_package_manager_run_script_must_exist(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.write_package_json(root, {"test:other": "node --test other.test.mjs"})
+            self.write_record(
+                root,
+                VALID_RECORD.replace(
+                    "`tests/test_example.py` fails if the bug path returns.",
+                    "`npm run test:planner` fails when the provider casing regresses.",
+                ),
+            )
+
+            result = self.run_checker(root)
+
+            self.assertIn(
+                "package-manager command references missing package.json script: "
+                "npm run test:planner",
+                result.stdout,
+            )
+            self.assertEqual(1, result.returncode)
+
+    def test_package_manager_run_script_requires_root_package_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            nested_package = root / "packages" / "app"
+            nested_package.mkdir(parents=True)
+            self.write_package_json(
+                nested_package,
+                {"test:planner": "node --test planner.test.mjs"},
+            )
+            self.write_record(
+                root,
+                VALID_RECORD.replace(
+                    "`tests/test_example.py` fails if the bug path returns.",
+                    "`npm run test:planner` fails when the provider casing regresses.",
+                ),
+            )
+
+            result = self.run_checker(root)
+
+            self.assertIn(
+                "package-manager command references missing package.json script: "
+                "npm run test:planner",
+                result.stdout,
+            )
+            self.assertEqual(1, result.returncode)
 
     def test_valid_existing_path_may_include_planned_word(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

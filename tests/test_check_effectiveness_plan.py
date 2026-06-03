@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 import tempfile
@@ -88,6 +89,12 @@ class CheckEffectivenessPlanTests(unittest.TestCase):
         path = root / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("", encoding="utf-8")
+
+    def write_package_json(self, root: Path, scripts: dict[str, str]) -> None:
+        (root / "package.json").write_text(
+            json.dumps({"scripts": scripts}),
+            encoding="utf-8",
+        )
 
     def test_no_report_passes_unless_report_is_required(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -442,6 +449,10 @@ class CheckEffectivenessPlanTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.write_failure_record(root)
+            self.write_package_json(
+                root,
+                {"test:planner": "node --test planner.test.mjs"},
+            )
             report = COMPLETE_ADOPTION_REPORT.replace(
                 "- Recorded: none; no recurring failure was fixed.",
                 "- Recorded: `docs/failures/0001-provider-casing.md`.",
@@ -460,6 +471,129 @@ class CheckEffectivenessPlanTests(unittest.TestCase):
 
             self.assertEqual("", result.stdout)
             self.assertEqual(0, result.returncode)
+
+    def test_recorded_failure_command_allows_terminal_punctuation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.write_failure_record(root)
+            self.write_package_json(
+                root,
+                {"test:planner": "node --test planner.test.mjs"},
+            )
+            report = COMPLETE_ADOPTION_REPORT.replace(
+                "- Recorded: none; no recurring failure was fixed.",
+                "- Recorded: `docs/failures/0001-provider-casing.md`.",
+            ).replace(
+                "- Detection or prevention check: not applicable because no failure record was\n"
+                "  added.",
+                "- Detection or prevention check: npm run test:planner.",
+            ).replace(
+                "- Skipped: no user-visible runtime failure, high-risk bug path, failed check,\n"
+                "  CI failure, repeated agent mistake, or cross-environment mismatch was fixed.",
+                "- Skipped: none; failure memory was recorded.",
+            )
+            (root / "adoption-report.md").write_text(report, encoding="utf-8")
+
+            result = self.run_checker(root)
+
+            self.assertEqual("", result.stdout)
+            self.assertEqual(0, result.returncode)
+
+    def test_recorded_failure_command_managers_use_root_scripts(self) -> None:
+        examples = (
+            "npm run test:planner",
+            "pnpm run test:planner",
+            "yarn run test:planner",
+            "bun run test:planner",
+        )
+        for example in examples:
+            with self.subTest(example=example):
+                with tempfile.TemporaryDirectory() as tmp:
+                    root = Path(tmp)
+                    self.write_failure_record(root)
+                    self.write_package_json(
+                        root,
+                        {"test:planner": "node --test planner.test.mjs"},
+                    )
+                    report = COMPLETE_ADOPTION_REPORT.replace(
+                        "- Recorded: none; no recurring failure was fixed.",
+                        "- Recorded: `docs/failures/0001-provider-casing.md`.",
+                    ).replace(
+                        "- Detection or prevention check: not applicable because no failure record was\n"
+                        "  added.",
+                        f"- Detection or prevention check: `{example}`.",
+                    ).replace(
+                        "- Skipped: no user-visible runtime failure, high-risk bug path, failed check,\n"
+                        "  CI failure, repeated agent mistake, or cross-environment mismatch was fixed.",
+                        "- Skipped: none; failure memory was recorded.",
+                    )
+                    (root / "adoption-report.md").write_text(report, encoding="utf-8")
+
+                    result = self.run_checker(root)
+
+                    self.assertEqual("", result.stdout)
+                    self.assertEqual(0, result.returncode)
+
+    def test_recorded_failure_with_missing_package_script_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.write_failure_record(root)
+            self.write_package_json(root, {"test:other": "node --test other.test.mjs"})
+            report = COMPLETE_ADOPTION_REPORT.replace(
+                "- Recorded: none; no recurring failure was fixed.",
+                "- Recorded: `docs/failures/0001-provider-casing.md`.",
+            ).replace(
+                "- Detection or prevention check: not applicable because no failure record was\n"
+                "  added.",
+                "- Detection or prevention check: `npm run test:planner`.",
+            ).replace(
+                "- Skipped: no user-visible runtime failure, high-risk bug path, failed check,\n"
+                "  CI failure, repeated agent mistake, or cross-environment mismatch was fixed.",
+                "- Skipped: none; failure memory was recorded.",
+            )
+            (root / "adoption-report.md").write_text(report, encoding="utf-8")
+
+            result = self.run_checker(root)
+
+            self.assertIn(
+                "failure-memory detection references missing package.json script: "
+                "npm run test:planner",
+                result.stdout,
+            )
+            self.assertEqual(1, result.returncode)
+
+    def test_recorded_failure_requires_root_package_script(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.write_failure_record(root)
+            nested_package = root / "packages" / "app"
+            nested_package.mkdir(parents=True)
+            self.write_package_json(
+                nested_package,
+                {"test:planner": "node --test planner.test.mjs"},
+            )
+            report = COMPLETE_ADOPTION_REPORT.replace(
+                "- Recorded: none; no recurring failure was fixed.",
+                "- Recorded: `docs/failures/0001-provider-casing.md`.",
+            ).replace(
+                "- Detection or prevention check: not applicable because no failure record was\n"
+                "  added.",
+                "- Detection or prevention check: `npm run test:planner`.",
+            ).replace(
+                "- Skipped: no user-visible runtime failure, high-risk bug path, failed check,\n"
+                "  CI failure, repeated agent mistake, or cross-environment mismatch was fixed.",
+                "- Skipped: none; failure memory was recorded.",
+            )
+            (root / "adoption-report.md").write_text(report, encoding="utf-8")
+
+            result = self.run_checker(root)
+
+            self.assertIn(
+                "failure-memory detection references missing package.json script: "
+                "npm run test:planner",
+                result.stdout,
+            )
+            self.assertEqual(1, result.returncode)
 
     def test_recorded_failure_with_skipped_no_failure_fails(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
