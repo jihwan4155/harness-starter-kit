@@ -430,6 +430,7 @@ class RepositoryHygieneTests(unittest.TestCase):
         validation = (REPO_ROOT / "docs" / "validation.md").read_text(
             encoding="utf-8"
         )
+        contributing = (REPO_ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")
         root_workflow = (
             REPO_ROOT / ".github" / "workflows" / "harness-check.yml"
         ).read_text(encoding="utf-8")
@@ -489,6 +490,8 @@ class RepositoryHygieneTests(unittest.TestCase):
         )
         for text in (component_map, validation, agent_template, adoption_prompt):
             self.assertIn("check_failure_memory.py", text)
+        self.assertIn("check_failure_memory.py", contributing)
+        self.assertIn("python scripts/check_failure_memory.py", contributing)
 
         for text in (root_workflow, generic_workflow):
             self.assertIn("fetch-depth: 0", text)

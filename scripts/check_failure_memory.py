@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 import re
 from pathlib import Path
@@ -37,6 +38,10 @@ PATH_REFERENCE_RE = re.compile(
     r"`?((?:tests?|specs?|fixtures?|scripts?|docs/checklists)/[^\s,;)`]+"
     r"|\.github/workflows/[^\s,;)`]+)`?",
     flags=re.IGNORECASE,
+)
+
+PACKAGE_SCRIPT_COMMAND_RE = re.compile(
+    r"\b(?P<manager>npm|pnpm|yarn|bun)\s+run\s+(?P<script>[\w:./-]+)"
 )
 
 REJECTED_PHRASES = (
@@ -140,6 +145,42 @@ def missing_referenced_paths(root: Path, section: str) -> list[str]:
     ]
 
 
+def normalize_package_script(value: str) -> str:
+    return value.rstrip(".,;)]}")
+
+
+def root_package_scripts(root: Path) -> set[str]:
+    package_json = root / "package.json"
+    if not package_json.exists():
+        return set()
+    try:
+        data = json.loads(package_json.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return set()
+    package_scripts = data.get("scripts") if isinstance(data, dict) else None
+    if not isinstance(package_scripts, dict):
+        return set()
+    return {str(name) for name in package_scripts}
+
+
+def missing_package_script_commands(root: Path, section: str) -> list[str]:
+    commands = sorted(
+        {
+            (match.group("manager"), normalize_package_script(match.group("script")))
+            for match in PACKAGE_SCRIPT_COMMAND_RE.finditer(section)
+        }
+    )
+    if not commands:
+        return []
+
+    scripts = root_package_scripts(root)
+    return [
+        f"{manager} run {script}"
+        for manager, script in commands
+        if script not in scripts
+    ]
+
+
 def validate_record(root: Path, path: Path) -> list[Finding]:
     text = path.read_text(encoding="utf-8")
     findings: list[Finding] = []
@@ -185,6 +226,17 @@ def validate_record(root: Path, path: Path) -> list[Finding]:
             Finding(
                 path,
                 f"detection/prevention references missing local path: {reference}",
+            )
+        )
+
+    for command in missing_package_script_commands(root, detection_section):
+        findings.append(
+            Finding(
+                path,
+                (
+                    "package-manager command references missing package.json "
+                    f"script: {command}"
+                ),
             )
         )
 

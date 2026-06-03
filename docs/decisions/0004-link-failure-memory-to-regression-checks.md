@@ -71,9 +71,19 @@ post-push, or unknown.
 - Path-existence validation confirms that cited local test, fixture, script,
   workflow, or checklist files exist, but it does not prove that the cited check
   asserts the specific failure axis.
-- Command-shaped checks such as `npm run test:planner` are recognized by shape,
-  but the checker does not yet verify that the command exists in the target
-  package manager or task runner configuration.
+- Package-manager script checks such as `npm run test:planner`,
+  `pnpm run test:planner`, `yarn run test:planner`, and
+  `bun run test:planner` are verified against the checked-in root
+  `package.json` `scripts` entries. This closes the first fake-command gap for
+  JavaScript package scripts and avoids passing a root command only because a
+  nested workspace package has the same script, but it still does not prove that
+  the script asserts the specific failure axis.
+- Other command-shaped checks are still recognized mostly by shape. The checker
+  does not yet verify that `make`, `just`, Python module commands, Gradle,
+  Maven, Go, Rust, .NET, or other task-runner commands exist in the target
+  configuration.
+- Monorepo and workspace-specific commands need explicit target adaptation when
+  the intended command is not runnable from the repository root.
 - Detection-link validation is regex-based. It blocks known non-committal
   phrases, but future wording may require additional test cases.
 - Generic command coverage is still biased toward common JavaScript and Python
