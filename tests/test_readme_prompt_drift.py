@@ -55,6 +55,37 @@ class ReadmePromptDriftTests(unittest.TestCase):
                         f"{exc.reason}"
                     )
 
+    def test_language_switcher_highlights_only_current_language(self) -> None:
+        expected_switchers = {
+            "README.md": (
+                "**English** | [한국어](README.ko.md) | "
+                "[日本語](README.ja.md) | [简体中文](README.zh-CN.md)"
+            ),
+            "README.ko.md": (
+                "[English](README.md) | **한국어** | "
+                "[日本語](README.ja.md) | [简体中文](README.zh-CN.md)"
+            ),
+            "README.ja.md": (
+                "[English](README.md) | [한국어](README.ko.md) | "
+                "**日本語** | [简体中文](README.zh-CN.md)"
+            ),
+            "README.zh-CN.md": (
+                "[English](README.md) | [한국어](README.ko.md) | "
+                "[日本語](README.ja.md) | **简体中文**"
+            ),
+        }
+
+        for filename, expected in expected_switchers.items():
+            with self.subTest(readme=filename):
+                text = (REPO_ROOT / filename).read_text(encoding="utf-8")
+                switcher = next(
+                    line
+                    for line in text.splitlines()
+                    if "English" in line and "한국어" in line and "日本語" in line
+                )
+                self.assertEqual(expected, switcher)
+                self.assertEqual(2, switcher.count("**"))
+
     def test_first_localized_readme_agent_prompt_stays_english(self) -> None:
         expected_blocks = agent_prompt_blocks(REPO_ROOT / "README.md")
         self.assertGreaterEqual(len(expected_blocks), 1)

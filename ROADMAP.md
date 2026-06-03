@@ -1,7 +1,7 @@
 # Roadmap
 
 This roadmap describes where `harness-starter-kit` should grow after the
-`v0.1.0` early release.
+current early releases.
 
 The project should stay prompt-first. The goal is to help maintainers turn
 repository-specific agent instructions into durable rules, checks, examples,
@@ -33,17 +33,19 @@ promise that every item belongs in the next release.
 ## Adoption Evidence
 
 The project needs more examples that show how prompt-first harness adoption
-behaves in real repositories.
+behaves in real repositories. Recent work has added Django and Next.js dogfood
+targets, lifecycle pilot notes, concrete failure-memory records, and practical
+external API verification guidance. Future examples should broaden that
+evidence instead of repeating the same target shapes.
 
 Useful examples include:
 
 - a TypeScript or Node.js service adoption
-- a Next.js app adoption
 - a FastAPI adoption with completed effectiveness tracking
 - a monorepo adoption note
 - a GitLab CI adoption note
-- a second dogfood repository beyond the Django reference target
-- a real `docs/failures/` record from dogfood adoption, update, or refresh work
+- a comparative effectiveness report using repeated task outcomes across more
+  than one target repository
 
 Each example should document what was adopted, adapted, skipped, and verified.
 Add practical effectiveness measurement examples using the existing report
@@ -56,19 +58,19 @@ less useful during hard implementation work. Near-term improvements should add
 more reusable, execution-oriented patterns without turning the kit into a
 framework-specific fixer.
 
-Useful additions include:
+Recent additions cover external API checklists, provider-boundary fixture
+guidance, Next.js App Router notes, failure-memory verification, decision-memory
+warnings, and deterministic behavior gate placement. Useful next additions
+include:
 
-- external API recipes for secret redaction, zero-result responses, mixed
-  JSON/XML envelopes, provider error formats, health endpoints, and live/mock
-  fallback policy
-- clearer ADR and failure-record boundary examples so small changes do not
-  create unnecessary documentation pressure
-- verification-script examples that summarize which axes were checked instead
-  of only returning pass/fail
-- Next.js App Router guidance for route handlers, server components, runtime
-  selection, and environment handling
-- examples where a target-specific smoke script catches a real backend or API
-  bug that lint, typecheck, and build could not prove
+- more fixture-backed examples for provider-specific request shape, response
+  envelopes, redaction, zero-result behavior, and provider errors
+- clearer ADR and failure-record boundary examples for small changes so
+  maintainers do not create unnecessary documentation pressure
+- verification-script examples that summarize checked axes and explain focused
+  or manual gate placement
+- examples where a target-specific smoke script catches a real backend, API, or
+  cross-environment bug that lint, typecheck, and build could not prove
 
 ## Governance Commands
 
@@ -76,10 +78,10 @@ Future command work should make the harness easier to maintain without turning
 the starter kit into an automatic rewrite system.
 
 - Improve Harness Doctor evidence messages and scoring calibration.
-- Refine `/harness update` and `/harness refresh` workflows from real target
-  repository use.
-- Refine the `/harness review` command for critical review of the current turn's
-  changes from an opposing harness-engineering perspective.
+- Refine `/harness update`, `/harness refresh`, and `/harness review` workflows
+  from real target repository use.
+- Improve diagnostics for durable-memory gaps, gate placement, and review timing
+  without making the commands mutate files by default.
 
 The review command should use a separate reviewer perspective or subagent when
 the environment supports it. Its job is not to continue implementation, but to

@@ -1,6 +1,6 @@
 # harness-starter-kit
 
-**[English](README.md)** | **한국어** | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
+[English](README.md) | **한국어** | [日本語](README.ja.md) | [简体中文](README.zh-CN.md)
 
 <p align="center">
   <img width="2172" height="724" alt="06d3c515-5fd8-4942-95e0-50ae2a2c5456" src="https://github.com/user-attachments/assets/4ba0bcf8-7500-49bd-a0fd-b8666807df39" />
