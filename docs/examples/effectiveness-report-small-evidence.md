@@ -39,9 +39,15 @@ Harness Doctor scores and passing checks are recorded only as harness health sig
 | Repeated mistakes | Not available | 0 repeated known mistakes observed | Inconclusive; no baseline |
 | First-pass verification success | Not available | 1 pass, 1 fail-then-pass, 1 pass-with-review-gap | Mixed; review still needed |
 | Docs-drift violations detected | Not available | 1 docs-drift violation detected and fixed | Narrow positive signal |
-| Review gaps detected | Not available | 3 review or feedback-loop gaps detected and fixed | Positive operational signal |
+| Review gaps detected | Not available | 4 review or feedback-loop gaps detected and fixed | Positive operational signal |
 | Human rework minutes | Not available | Approx. 55 minutes across 3 tasks | Initial benchmark only |
 | Reverted files | Not available | 0 | Inconclusive; no baseline |
+
+The four review gaps were:
+- README existed but was not useful project documentation.
+- Django tests initially found zero tests.
+- Some generated harness guidance remained too generic for the Django REST Framework target.
+- Category update and clear behavior was documented but not covered by PATCH tests on the first feature pass.
 
 ## Run Log
 
@@ -57,7 +63,7 @@ Harness Doctor scores and passing checks are recorded only as harness health sig
   - `docs/examples/task-outcomes/001-recipe-api-harness-adoption.yaml`
   - `docs/examples/task-outcomes/002-recipe-api-category-feature.yaml`
   - `docs/examples/task-outcomes/003-recipe-api-category-update-tests.yaml`
-- Repository refs compared: local practice branch snapshots
+- Repository refs compared: jihwan4155/recipe-api@99af81bf0da4a8bfecb19e5ca0af817b276f49b6
 - Prompt refs compared: local adoption, review, refresh, and feature prompts
 - Target-local decision records reviewed:
   - Initial API design decision

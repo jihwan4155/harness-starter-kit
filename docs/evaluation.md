@@ -98,4 +98,4 @@ cheaper to correct after the harness becomes part of the repository.
 
 ## Example Evidence Passes
 
-- [Small harness outcome evidence report](examples/effectiveness-small-evidence-report.md) records three harnessed task outcomes and summarizes a narrow operational evidence pass without treating Harness Doctor scores or passing checks as proof of agent effectiveness.
+- [Small harness outcome evidence report](examples/effectiveness-report-small-evidence.md) records three harnessed task outcomes and summarizes a narrow operational evidence pass without treating Harness Doctor scores or passing checks as proof of agent effectiveness.
